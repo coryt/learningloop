@@ -1,6 +1,6 @@
 using LearningLoop.Core.Domain;
 using LearningLoop.Core.DomainServices;
-using LearningLoop.Web.ViewModels;
+using LearningLoop.Web.Models;
 using ServiceStack;
 
 namespace LearningLoop.Web.Services

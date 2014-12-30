@@ -4,31 +4,32 @@ using System.Collections.Generic;
 using System.Linq;
 using LearningLoop.Core.Domain;
 using LearningLoop.Core.DomainServices;
+using Raven.Client;
 
 namespace LearningLoop.Infrastructure.Repositories
 {
     public class ClassroomRepository : IClassroomRepository
     {
-        private IDictionary<long, Classroom> _context;
+        private readonly IDocumentSession _session;
 
-        public ClassroomRepository()
+        public ClassroomRepository(IDocumentSession session)
         {
-            _context = new ConcurrentDictionary<long, Classroom>();
+            _session = session;
         }
 
         public IEnumerable<Classroom> GetAll()
         {
-            return _context.Values;
+            return _session.Query<Classroom>();
         }
 
-        public IEnumerable<Classroom> GetByIds(IEnumerable<long> ids)
+        public IEnumerable<Classroom> GetByIds(IEnumerable<string> ids)
         {
-            return _context.Values.Where(classes => ids.Any(id => id == classes.Id));
+            return _session.Query<Classroom>().Where(classes => ids.Any(id => id == classes.Id));
         }
 
-        public Classroom GetById(long id)
+        public Classroom GetById(string id)
         {
-            return _context[id];
+            return _session.Load<Classroom>(id);
         }
 
         public Classroom Save(Classroom classroom)
@@ -36,7 +37,7 @@ namespace LearningLoop.Infrastructure.Repositories
             if (classroom == null)
                 throw new ArgumentNullException("classroom", "classroom cannot be null");
 
-            _context.Add(classroom.Id, classroom);
+            _session.Store(classroom);
             return classroom;
         }
 
@@ -48,8 +49,9 @@ namespace LearningLoop.Infrastructure.Repositories
             // Wrap this in a try catch so we can return a meaningful exception message
             try
             {
-                if (_context.ContainsKey(updatedClassroom.Id))
-                    _context[updatedClassroom.Id] = updatedClassroom;
+                var classroom = _session.Load<Classroom>(updatedClassroom.Id);
+                if (classroom != null)
+                    _session.Store(updatedClassroom);
                 else
                     throw new NullReferenceException("This classroom does not exist");
             }
@@ -59,9 +61,9 @@ namespace LearningLoop.Infrastructure.Repositories
             }
         }
 
-        public void Delete(long id)
+        public void Delete(string id)
         {
-            _context.Remove(id);
+            _session.Delete(id);
         }
     }
 }

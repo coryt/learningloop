@@ -1,6 +1,6 @@
 using ServiceStack;
 
-namespace LearningLoop.Web.ViewModels
+namespace LearningLoop.Web.Models
 {
     [Route("/classes", "POST")]
     [Route("/classes/{Id}", "PUT")]

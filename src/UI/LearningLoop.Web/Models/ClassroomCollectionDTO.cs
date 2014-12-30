@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using ServiceStack;
 
-namespace LearningLoop.Web.ViewModels
+namespace LearningLoop.Web.Models
 {
     [Route("/classes")]
     [Route("/classes/{Ids}")]
     public class ClassesViewModel : IReturn<List<ClassroomViewModel>>
     {
-        public long[] Ids { get; set; }
-        public ClassesViewModel(params long[] ids)
+        public string[] Ids { get; set; }
+        public ClassesViewModel(params string[] ids)
         {
             this.Ids = ids;
         }

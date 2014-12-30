@@ -1,17 +1,15 @@
-using System.Configuration;
 using System.Net;
 using Funq;
-using LearningLoop.DependencyResolution;
+using LearningLoop.Infrastructure.Persistence;
+using LearningLoop.Web.IoC;
 using LearningLoop.Web.Services;
+using Microsoft.Practices.ServiceLocation;
 using ServiceStack;
-using ServiceStack.Auth;
 using ServiceStack.Configuration;
-using ServiceStack.Data;
 using ServiceStack.Logging;
-using ServiceStack.OrmLite;
 using ServiceStack.Razor;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(LearningLoop.Web.App_Start.AppHost), "Start")]
+[assembly: WebActivator.PreApplicationStartMethod(typeof(LearningLoop.Web.App_Start.AppHost), "Start", Order = 2)]
 
 namespace LearningLoop.Web.App_Start
 {
@@ -21,19 +19,26 @@ namespace LearningLoop.Web.App_Start
 			: base("LearningLoop ASP.NET Host", typeof(ClassroomWebService).Assembly) { }
         public static void Start()
         {
+            LogManager.LogFactory = new ConsoleLogFactory();
             new AppHost().Init();
+            RouteConfig.Init();  
         }
 
 		public override void Configure(Container container)
 		{
-            //Dependencies should be registered in the DependencyRegistrar which is invoked during PreApplicationStartup
-            container.Adapter = new SimpleInjectorAdapter(DependencyRegistrar.Container);
-
-            LogManager.LogFactory = new ConsoleLogFactory();
+		    var simpleContainer = new SimpleInjector.Container();
+            DependencyRegistrar.RegisterServices(simpleContainer);
+            container.Adapter = new SimpleInjectorAdapter(simpleContainer); // to integrate with ServiceStack
+		    var adapter = new CommonServiceLocator.SimpleInjectorAdapter.SimpleInjectorServiceLocatorAdapter(simpleContainer);
+            ServiceLocator.SetLocatorProvider(() => adapter); // to integrate with service locator
 
             ConfigurePlugins();
 
-		    RouteConfig.Init();  
+            var appSettings = new AppSettings();
+		    if (appSettings.Get("populateMockData", false))
+		    {
+		        RavenDBBootstrap.PopulateMockData();
+		    }
 		}
 
         private void ConfigurePlugins()
