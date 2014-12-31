@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using LearningLoop.Core.Domain;
 using LearningLoop.Core.DomainServices;
 using Raven.Client;
 
-namespace LearningLoop.Infrastructure.Repositories
+namespace LearningLoop.Infrastructure.Persistence
 {
     public class ClassroomRepository : IClassroomRepository
     {
@@ -24,7 +23,7 @@ namespace LearningLoop.Infrastructure.Repositories
 
         public IEnumerable<Classroom> GetByIds(IEnumerable<string> ids)
         {
-            return _session.Query<Classroom>().Where(classes => ids.Any(id => id == classes.Id));
+            return Queryable.Where(_session.Query<Classroom>(), classes => ids.Any(id => id == classes.Id));
         }
 
         public Classroom GetById(string id)

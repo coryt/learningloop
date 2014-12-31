@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Net;
-using System.Net.Sockets;
+using System.IdentityModel.Claims;
 using LearningLoop.Infrastructure.Persistence;
 using Raven.Client;
-using Raven.Client.Document;
-using Raven.Client.Indexes;
+using ServiceStack.Html.AntiXsrf;
 using ServiceStack.MiniProfiler;
 
 namespace LearningLoop.Web
@@ -35,6 +33,7 @@ namespace LearningLoop.Web
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
             RavenDBBootstrap.InitializeDocumentStore();
         }
 

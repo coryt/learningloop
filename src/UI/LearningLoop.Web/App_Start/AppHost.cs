@@ -34,6 +34,7 @@ namespace LearningLoop.Web.App_Start
 
             ConfigurePlugins();
 
+            // Checkout ServiceStack wiki to extend upon this configuration, https://github.com/ServiceStack/ServiceStack/wiki/Config-API
             var appSettings = new AppSettings();
 		    if (appSettings.Get("populateMockData", false))
 		    {

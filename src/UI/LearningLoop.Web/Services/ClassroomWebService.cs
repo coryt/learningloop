@@ -5,9 +5,16 @@ using ServiceStack;
 
 namespace LearningLoop.Web.Services
 {
+    [ClientCanSwapTemplates]
+    [DefaultView("default")]
     public class ClassroomWebService : Service
     {
         public IClassroomRepository Repository { get; set; }  //Injected by IOC
+
+        public object Get()
+        {
+            return null;
+        }
 
         public object Get(ClassesViewModel request)
         {
