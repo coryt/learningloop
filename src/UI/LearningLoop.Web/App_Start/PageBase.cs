@@ -1,4 +1,5 @@
 using System.Web.UI;
+using LearningLoop.Core.WebServices.Types;
 using ServiceStack;
 using ServiceStack.Caching;
 
@@ -39,7 +40,7 @@ namespace LearningLoop.Web.App_Start
             get { return _sessionFactory ?? (_sessionFactory = HostContext.Resolve<ISessionFactory>()) ?? new SessionFactory(Cache); }
         }
        
-        public new ISession SessionBag
+        public ISession SessionBag
         {
             get
             {

@@ -4,11 +4,10 @@ using System.Net;
 using System.Net.Sockets;
 using Funq;
 using LearningLoop.Core.Domain;
-using LearningLoop.Web.App_Start;
+using LearningLoop.Core.WebServices.Types;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Linq;
-using ServiceStack;
 using ServiceStack.Auth;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(LearningLoop.Infrastructure.Persistence.RavenDBBootstrap), "InitializeDocumentStore", Order = 1)]
@@ -101,8 +100,9 @@ namespace LearningLoop.Infrastructure.Persistence
                     Email = "cory.c.taylor@gmail.com",
                 }, "test");
             }
-            catch (Exception ignoreExistingUser)
+            catch
             {
+                // ignored
             }
 
             using (var session = DocumentStore.OpenSession())

@@ -2,7 +2,7 @@ using ServiceStack;
 using ServiceStack.Auth;
 using ServiceStack.FluentValidation;
 
-namespace LearningLoop.Web.App_Start
+namespace LearningLoop.Web.Plugins
 {
     public class CustomRegisterPlugin : IPlugin
     {

@@ -4,7 +4,7 @@ using ServiceStack.Auth;
 using ServiceStack.Text;
 using ServiceStack.Web;
 
-namespace LearningLoop.Web.App_Start
+namespace LearningLoop.Core.WebServices.Types
 {
     public class CustomUserSession : AuthUserSession
     {

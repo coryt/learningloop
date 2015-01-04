@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Security.Claims;
 using LearningLoop.Infrastructure.Persistence;
-using Raven.Client;
-using ServiceStack.Html.AntiXsrf;
+using ServiceStack.Logging;
 using ServiceStack.MiniProfiler;
 
 namespace LearningLoop.Web
@@ -12,30 +10,31 @@ namespace LearningLoop.Web
     {
         public Global()
         {
-            BeginRequest += (sender, args) =>
-            {
-                //Context.Items["CurrentRequestRavenSession"] = RavenController.DocumentStore.OpenSession();
-            };
-            EndRequest += (sender, args) =>
-            {
-                using (var session = (IDocumentSession)Context.Items["CurrentRequestRavenSession"])
-                {
-                    if (session == null)
-                        return;
+            //BeginRequest += (sender, args) =>
+            //{
+            //    //Context.Items["CurrentRequestRavenSession"] = RavenController.DocumentStore.OpenSession();
+            //};
+            //EndRequest += (sender, args) =>
+            //{
+            //    using (var session = (IDocumentSession)Context.Items["CurrentRequestRavenSession"])
+            //    {
+            //        if (session == null)
+            //            return;
 
-                    if (Server.GetLastError() != null)
-                        return;
+            //        if (Server.GetLastError() != null)
+            //            return;
 
-                    session.SaveChanges();
-                }
-            };
+            //        session.SaveChanges();
+            //    }
+            //};
         }
 
         protected void Application_Start(object sender, EventArgs e)
         {
             log4net.Config.XmlConfigurator.Configure();
-            AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
+            LogManager.LogFactory = new ConsoleLogFactory();
             RavenDBBootstrap.InitializeDocumentStore();
+            new AppHost().Init();
         }
 
         protected void Application_BeginRequest(object src, EventArgs e)

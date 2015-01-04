@@ -2,7 +2,7 @@ using System;
 using ServiceStack;
 using ServiceStack.Auth;
 
-namespace LearningLoop.Web.App_Start
+namespace LearningLoop.Web.Plugins
 {
     public class CustomCredentialsAuthProvider : CredentialsAuthProvider
     {
