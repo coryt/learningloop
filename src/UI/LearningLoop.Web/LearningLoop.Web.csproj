@@ -41,11 +41,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BrockAllen.MembershipReboot">
-      <HintPath>..\..\packages\BrockAllen.MembershipReboot.8.1.0\lib\net45\BrockAllen.MembershipReboot.dll</HintPath>
-    </Reference>
     <Reference Include="CommonServiceLocator.SimpleInjectorAdapter">
       <HintPath>..\..\packages\CommonServiceLocator.SimpleInjectorAdapter.2.6.1\lib\portable-net4+sl4+wp8+win8+wpa81\CommonServiceLocator.SimpleInjectorAdapter.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth">
+      <HintPath>..\..\packages\DotNetOpenAuth.Ultimate.4.3.4.13329\lib\net45-full\DotNetOpenAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.ServiceLocation">
@@ -63,17 +66,34 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RavenDB.Client.2.5.2946\lib\net45\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack">
-      <HintPath>..\..\packages\ServiceStack.4.0.34\lib\net40\ServiceStack.dll</HintPath>
+    <Reference Include="ServiceStack, Version=4.0.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.4.0.35\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Client">
-      <HintPath>..\..\packages\ServiceStack.Client.4.0.34\lib\net40\ServiceStack.Client.dll</HintPath>
+    <Reference Include="ServiceStack.Authentication.OAuth2">
+      <HintPath>..\..\packages\ServiceStack.Authentication.OAuth2.4.0.35\lib\net40\ServiceStack.Authentication.OAuth2.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="ServiceStack.Common">
-      <HintPath>..\..\packages\ServiceStack.Common.4.0.34\lib\net40\ServiceStack.Common.dll</HintPath>
+    <Reference Include="ServiceStack.Authentication.OpenId">
+      <HintPath>..\..\packages\ServiceStack.Authentication.OpenId.4.0.35\lib\net40\ServiceStack.Authentication.OpenId.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Interfaces">
-      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.34\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
+    <Reference Include="ServiceStack.Authentication.RavenDb">
+      <HintPath>..\..\packages\ServiceStack.Authentication.RavenDB.4.0.35\lib\net40\ServiceStack.Authentication.RavenDb.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Client, Version=4.0.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Client.4.0.35\lib\net40\ServiceStack.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=4.0.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Common.4.0.35\lib\net40\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=4.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Interfaces.4.0.35\lib\portable-wp80+sl5+net40+win8+monotouch+monoandroid\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Logging.Log4Net">
+      <HintPath>..\..\packages\ServiceStack.Logging.Log4Net.4.0.35\lib\net40\ServiceStack.Logging.Log4Net.dll</HintPath>
     </Reference>
     <Reference Include="ServiceStack.OrmLite">
       <HintPath>..\..\packages\ServiceStack.OrmLite.4.0.34\lib\net45\ServiceStack.OrmLite.dll</HintPath>
@@ -91,9 +111,9 @@
     <Reference Include="ServiceStack.Server">
       <HintPath>..\..\packages\ServiceStack.Server.4.0.34\lib\net45\ServiceStack.Server.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack.Text">
-      <HintPath>..\..\packages\ServiceStack.Text.4.0.34\lib\net40\ServiceStack.Text.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ServiceStack.Text, Version=4.0.35.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\ServiceStack.Text.4.0.35\lib\net40\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="SimpleInjector, Version=2.6.1.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -104,7 +124,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -112,10 +132,6 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=e06fbc6124f57c43, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\ServiceStack.Razor.4.0.34\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
@@ -128,11 +144,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="content\js\jsonviewer.js" />
     <Content Include="packages.config" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="default.cshtml" />
     <Content Include="notfound.cshtml" />
     <Content Include="Views\default.cshtml" />
+    <Content Include="Views\UserAccount\Login.cshtml" />
+    <Content Include="Views\UserAccount\Logout.cshtml" />
+    <Content Include="Views\UserAccount\Register.cshtml" />
+    <Content Include="Views\UserAccount\Success.cshtml" />
+    <Content Include="Views\UserAccount\Verify.cshtml" />
+    <Content Include="Views\UserAccount\Error.cshtml" />
+    <Content Include="auth.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -146,11 +170,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AppHost.cs" />
+    <Compile Include="App_Start\CustomUserAuth.cs" />
+    <Compile Include="App_Start\CustomUserAuthDetails.cs" />
+    <Compile Include="Plugins\CustomCredentialsAuthProvider.cs" />
+    <Compile Include="Plugins\CustomRegisterPlugin.cs" />
     <Compile Include="App_Start\DependencyRegistrar.cs" />
-    <Compile Include="App_Start\MembershipRebootConfig.cs" />
     <Compile Include="App_Start\RavenDBBootstrap.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\TwilloSmsEventHandler.cs" />
     <Compile Include="IoC\SimpleInjectorAdapter.cs" />
     <Compile Include="Models\ClassroomCollectionDTO.cs" />
     <Compile Include="Models\ClassroomViewModel.cs" />
@@ -162,6 +188,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\ClassroomWebService.cs" />
   </ItemGroup>
   <ItemGroup>

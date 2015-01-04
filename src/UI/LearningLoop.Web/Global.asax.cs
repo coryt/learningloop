@@ -1,5 +1,5 @@
 ﻿using System;
-using System.IdentityModel.Claims;
+using System.Security.Claims;
 using LearningLoop.Infrastructure.Persistence;
 using Raven.Client;
 using ServiceStack.Html.AntiXsrf;
@@ -33,6 +33,7 @@ namespace LearningLoop.Web
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            log4net.Config.XmlConfigurator.Configure();
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
             RavenDBBootstrap.InitializeDocumentStore();
         }

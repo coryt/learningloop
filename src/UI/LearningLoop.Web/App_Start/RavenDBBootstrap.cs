@@ -1,11 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using Funq;
 using LearningLoop.Core.Domain;
+using LearningLoop.Web.App_Start;
 using Raven.Client;
 using Raven.Client.Document;
 using Raven.Client.Linq;
 using ServiceStack;
+using ServiceStack.Auth;
 
 [assembly: WebActivator.PreApplicationStartMethod(typeof(LearningLoop.Infrastructure.Persistence.RavenDBBootstrap), "InitializeDocumentStore", Order = 1)]
 
@@ -62,7 +66,7 @@ namespace LearningLoop.Infrastructure.Persistence
             }
         }
 
-        public static void PopulateMockData()
+        public static void PopulateMockData(Container container)
         {
             var classes = new List<Classroom>()
             {
@@ -82,6 +86,24 @@ namespace LearningLoop.Infrastructure.Persistence
                     UniqueName = "Classroom 3"
                 }
             };
+
+            var authRepo = (IUserAuthRepository)container.Resolve<IAuthRepository>();
+
+            try
+            {
+                authRepo.CreateUserAuth(new CustomUserAuth
+                {
+                    Custom = "CustomUserAuth",
+                    DisplayName = "Cory CT",
+                    FirstName = "Cory",
+                    LastName = "Taylor",
+                    FullName = "Cory Taylor",
+                    Email = "cory.c.taylor@gmail.com",
+                }, "test");
+            }
+            catch (Exception ignoreExistingUser)
+            {
+            }
 
             using (var session = DocumentStore.OpenSession())
             {
