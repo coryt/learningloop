@@ -146,16 +146,11 @@
   <ItemGroup>
     <Content Include="content\js\jsonviewer.js" />
     <Content Include="packages.config" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Views\_Layout.cshtml" />
     <Content Include="default.cshtml" />
     <Content Include="notfound.cshtml" />
     <Content Include="Views\default.cshtml" />
-    <Content Include="Views\UserAccount\Login.cshtml" />
-    <Content Include="Views\UserAccount\Logout.cshtml" />
-    <Content Include="Views\UserAccount\Register.cshtml" />
-    <Content Include="Views\UserAccount\Success.cshtml" />
-    <Content Include="Views\UserAccount\Verify.cshtml" />
-    <Content Include="Views\UserAccount\Error.cshtml" />
     <Content Include="auth.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
