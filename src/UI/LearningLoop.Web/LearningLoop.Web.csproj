@@ -144,15 +144,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="css\app.css" />
     <Content Include="css\homepage.css" />
     <Content Include="Global.asax" />
+    <Content Include="img\Male1.png" />
+    <Content Include="img\Male2.png" />
+    <Content Include="img\Male3.png" />
     <Content Include="img\facebook_normal.png" />
+    <Content Include="img\Female1.png" />
+    <Content Include="img\Female2.png" />
+    <Content Include="img\Female3.png" />
     <Content Include="img\github_normal.png" />
+    <Content Include="img\no-profile-pic-200.png" />
+    <Content Include="img\no-profile-pic-64.png" />
+    <Content Include="img\no-profile-pic-96.png" />
+    <Content Include="img\no-profile-pic.jpg" />
     <Content Include="img\no-profile64.png" />
+    <Content Include="img\stock-vector-children-face-set-138823955.jpg" />
     <Content Include="img\twitter_normal.png" />
     <Content Include="js\homepage.js" />
-    <Content Include="js\jsonviewer.js" />
     <Content Include="gruntfile.js" />
     <Content Include="packages.config" />
     <Content Include="appSettings.config" />
@@ -164,7 +173,8 @@
     <Content Include="default.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Header.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

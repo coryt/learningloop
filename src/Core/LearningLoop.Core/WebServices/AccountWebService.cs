@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using LearningLoop.Core.Domain;
 using LearningLoop.Core.DomainServices;
 using LearningLoop.Core.WebServices.Types;
@@ -11,6 +12,10 @@ namespace LearningLoop.Core.WebServices
 
     public class AccountResponse
     {
+        public AccountResponse()
+        {
+            Class = new Classroom();
+        }
         public Classroom Class { get; set; }
     }
 
@@ -20,7 +25,31 @@ namespace LearningLoop.Core.WebServices
     {
         public object Get(GetAccount request)
         {
-            return new AccountResponse();
+            return new AccountResponse()
+            {
+                Class =
+                {
+                    Roster = new List<Student>
+                    {
+                        new Student()
+                        {
+                            DisplayName = "John",
+                            Gender = "Male",
+                        },
+                        new Student()
+                        {
+                            DisplayName = "Mary",
+                            Gender = "Female",
+                        },
+                        new Student()
+                        {
+                            DisplayName = "Jenny",
+                            Gender = "Female",
+                        }
+
+                    }
+                }
+            };
         }
     }
 }

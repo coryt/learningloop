@@ -13,12 +13,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>@ViewBag.Title</title>
 
-    <!--build:css css/app.min.css-->
-    <link rel="stylesheet" href="/css/app.css" />
-    <link rel="stylesheet" href="/css/homepage.css" />
-    <!-- endbuild -->
     <!--build:css lib/css/semantic-ui.min.css-->
     <link rel="stylesheet" href="/bower_components/semantic-ui/dist/semantic.css" />
+    <!-- endbuild -->
+    <!--build:css css/app.min.css-->
+    <link rel="stylesheet" href="/css/homepage.css" />
     <!-- endbuild -->
     <!-- build:js lib/js/jquery.min.js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
@@ -30,12 +29,13 @@
     <script src="/bower_components/semantic-ui/dist/semantic.js"></script>
     <!-- endbuild -->
     <script src="/js/ss-utils.js"></script>
-    <!-- build:js js/jsonviewer.js -->
-    <script src="/js/jsonviewer.js"></script>
-    <!-- endbuild -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/knockout/3.2.0/knockout-min.js"></script>
     <!-- build:js js/homepage.js -->
     <script src="/js/homepage.js"></script>
     <!-- endbuild -->
+    <script type="text/javascript">
+        window.App = {};
+    </script>
 </head>
 <body class="@ViewBag.BodyClass.ToString().ToLower()">
 
@@ -49,19 +49,19 @@
             <div class="content">
                 <div class="ui two column aligned relaxed fitted stackable grid">
                     <div class="column">
-                        <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
-                            <i class="fa fa-twitter"></i>Sign in with Twitter
-                        </a>
-                        <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
-                            <i class="fa fa-facebook"></i>Sign in with Facebook
-                        </a>
+                        @*<a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
+                                <i class="fa fa-twitter"></i>Sign in with Twitter
+                            </a>
+                            <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
+                                <i class="fa fa-facebook"></i>Sign in with Facebook
+                            </a>
 
-                        <a class="btn btn-block btn-social btn-google-plus" href="/auth/GoogleOAuth">
-                            <i class="fa fa-google-plus"></i>Sign in with Google
-                        </a>
-                        <a class="btn btn-block btn-social btn-linkedin" href="/auth/LinkedIn">
-                            <i class="fa fa-linkedin"></i>Sign in with LinkedIn
-                        </a>
+                            <a class="btn btn-block btn-social btn-google-plus" href="/auth/GoogleOAuth">
+                                <i class="fa fa-google-plus"></i>Sign in with Google
+                            </a>
+                            <a class="btn btn-block btn-social btn-linkedin" href="/auth/LinkedIn">
+                                <i class="fa fa-linkedin"></i>Sign in with LinkedIn
+                            </a>*@
                         <hr />
                         <div class="ui form segment">
                             <form id="form-login" action="/auth/credentials">
@@ -82,7 +82,7 @@
                                         <span class="help-block"></span>
                                     </div>
                                 </div>
-                                <button type="submit" class="ui blue submit button">Login with your email</button>
+                                <button type="submit" class="ui blue right submit button">Login with your email</button>
                             </form>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                                         <label>Sign me up as a <b>parent</b></label>
                                     </div>
                                 </div>
-                                <button class="huge green ui labeled icon button">
+                                <button class="huge green ui right labeled icon button">
                                     <i class="signup icon"></i>
                                     Sign Up
                                 </button>
@@ -147,34 +147,12 @@
         </div>
     }
 
-    <div class="ui inverted masthead segment">
-        <div class="ui page grid">
-            <div class="column">
-                <div class="ui inverted blue large menu">
-                    <div class="header item"><a href="/">Learning Loop</a></div>
-                    <div class="right menu">
-                        <div class="item auth when-anon">Login</div>
-                        <div class="ui mobile dropdown item when-auth">
-                            <img src="@(this.ProfileUrl())" alt="gravatar" width="15" height="15"/>
-                            <div class="default text" data-html="DisplayName"></div>
-                            <i class="dropdown icon"></i>
-                            <div class="menu">
-                                <a class="item" href="@(new GetAccount().ToGetUrl())"><i class="edit icon"></i> Account</a>
-                                <a class="item" data-click="trigger:sign-out"><i class="sign out icon"></i> Logout</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @RenderSection("pageHeader")
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_Header")
 
     @RenderBody()
 
-
+    @Html.Partial("_Footer")
     <script type="text/javascript">
-        window.App = {};
         $("a").setActiveLinks();
         $(document).bindHandlers();
 
@@ -249,6 +227,8 @@
             }
         }
     </script>
+
+
 
 </body>
 </html>
