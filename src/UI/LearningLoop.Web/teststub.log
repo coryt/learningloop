@@ -1,29 +1,187 @@
-2015-01-03 22:02:53,157 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'Provider:twitter AND UserId:14307654' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-03 22:02:53,226 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
-2015-01-03 22:02:53,230 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'Provider:twitter AND UserId:14307654' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-03 22:02:53,302 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
-2015-01-03 22:02:53,304 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'Provider:twitter AND UserId:14307654' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-03 22:02:53,367 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
-2015-01-03 22:02:53,549 (GMT-5) [11] DEBUG Raven.Client.Document.InMemoryDocumentSessionOperations - Saving 1 changes to https://diver.ravenhq.com/databases/coryt-learningloop;
-	PUT CustomUserAuths/33
-
-2015-01-03 22:02:53,784 (GMT-5) [11] DEBUG Raven.Client.Document.InMemoryDocumentSessionOperations - Saving 1 changes to https://diver.ravenhq.com/databases/coryt-learningloop;
-	PUT CustomUserAuthDetails/1
-
-2015-01-03 22:02:53,936 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [CustomUserAuths/33] from https://diver.ravenhq.com/databases/coryt-learningloop;
-2015-01-03 22:02:54,032 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:33' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-03 22:02:54,092 (GMT-5) [11] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
-2015-01-03 22:22:47,551 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query ' Search:(demis.bellot@gmail.com)' on index 'UserAuth/By/UserNameOrEmail' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-03 22:22:47,613 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 1/1 results
-2015-01-03 22:22:47,672 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:1' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-03 22:22:47,747 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
-2015-01-03 22:22:47,756 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [CustomUserAuths/1] from https://diver.ravenhq.com/databases/coryt-learningloop;
-2015-01-03 22:23:01,307 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query ' Search:(cory.c.taylor@gmail.com)' on index 'UserAuth/By/UserNameOrEmail' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-03 22:23:01,415 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 1/1 results
-2015-01-03 22:23:01,417 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:65' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-03 22:23:01,495 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
-2015-01-03 22:23:01,507 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [CustomUserAuths/65] from https://diver.ravenhq.com/databases/coryt-learningloop;
-2015-01-04 16:27:14,481 (GMT-5) [1] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query ' Search:(cory.c.taylor@gmail.com)' on index 'UserAuth/By/UserNameOrEmail' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-04 16:27:14,574 (GMT-5) [1] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 1/1 results
-2015-01-04 16:43:02,965 (GMT-5) [1] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query ' Search:(cory.c.taylor@gmail.com)' on index 'UserAuth/By/UserNameOrEmail' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
-2015-01-04 16:43:03,077 (GMT-5) [1] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 1/1 results
+2015-01-10 10:10:19,780 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:19,785 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:19,802 (GMT-5) [92] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:19,803 (GMT-5) [82] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:19,833 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:19,836 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:19,844 (GMT-5) [92] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:19,844 (GMT-5) [82] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:19,846 (GMT-5) [92] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:19,851 (GMT-5) [82] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:19,875 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:19,882 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:19,895 (GMT-5) [92] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:19,896 (GMT-5) [82] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:19,944 (GMT-5) [82] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:19,947 (GMT-5) [92] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:20,701 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:20,745 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:20,779 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:55,418 (GMT-5) [96] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:55,464 (GMT-5) [96] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:55,509 (GMT-5) [96] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:55,756 (GMT-5) [104] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:55,760 (GMT-5) [107] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:55,761 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:55,781 (GMT-5) [105] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:55,784 (GMT-5) [111] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:55,785 (GMT-5) [112] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:55,804 (GMT-5) [104] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:55,817 (GMT-5) [107] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:55,828 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:55,832 (GMT-5) [111] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:55,853 (GMT-5) [105] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:55,855 (GMT-5) [112] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:55,874 (GMT-5) [104] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:55,881 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:55,881 (GMT-5) [111] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:55,899 (GMT-5) [105] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:55,901 (GMT-5) [112] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:55,915 (GMT-5) [107] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:10:56,571 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:10:56,614 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:10:56,663 (GMT-5) [99] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:14:31,631 (GMT-5) [118] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:14:31,675 (GMT-5) [118] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:14:31,730 (GMT-5) [118] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:14:32,167 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:14:32,170 (GMT-5) [92] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:14:32,171 (GMT-5) [109] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:14:32,173 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:14:32,184 (GMT-5) [122] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:14:32,190 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:14:32,212 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:14:32,286 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:14:32,335 (GMT-5) [109] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:14:32,336 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:14:32,339 (GMT-5) [122] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:14:32,343 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:14:32,345 (GMT-5) [92] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:14:32,381 (GMT-5) [109] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:14:32,381 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:14:32,388 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:14:32,388 (GMT-5) [122] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:14:32,407 (GMT-5) [92] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:14:32,742 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:14:32,784 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:14:32,829 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:34,347 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:34,624 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:34,671 (GMT-5) [125] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:35,063 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:35,112 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:35,154 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:35,179 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:35,225 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:35,288 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:35,301 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:35,345 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:35,398 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:35,412 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:35,454 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:35,505 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:35,518 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:35,582 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:35,634 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:35,648 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:35,695 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:35,749 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:45,225 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:45,283 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:45,329 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:45,383 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:45,430 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:45,472 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:45,509 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:45,550 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:45,591 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:45,633 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:45,684 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:45,742 (GMT-5) [106] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:45,779 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:45,832 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:45,873 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:45,884 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:45,931 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:45,993 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:19:55,380 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:19:55,441 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:19:55,509 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:20:00,473 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:20:00,517 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:20:00,563 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:20:01,135 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:20:01,145 (GMT-5) [120] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:20:01,154 (GMT-5) [136] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:20:01,154 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:20:01,156 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:20:01,156 (GMT-5) [132] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:20:01,185 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:20:01,193 (GMT-5) [120] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:20:01,234 (GMT-5) [127] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:20:01,238 (GMT-5) [120] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:20:01,280 (GMT-5) [136] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:20:01,295 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:20:01,297 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:20:01,307 (GMT-5) [132] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:20:01,328 (GMT-5) [136] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:20:01,340 (GMT-5) [128] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:20:01,341 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:20:01,356 (GMT-5) [132] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:20:01,662 (GMT-5) [140] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:20:01,706 (GMT-5) [140] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:20:01,745 (GMT-5) [140] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:22:10,388 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:22:10,531 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:22:10,575 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:22:10,851 (GMT-5) [136] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:22:10,853 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:22:10,855 (GMT-5) [152] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:22:10,858 (GMT-5) [143] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:22:10,861 (GMT-5) [149] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:22:10,864 (GMT-5) [148] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:22:10,891 (GMT-5) [136] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:22:10,931 (GMT-5) [136] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:22:10,985 (GMT-5) [149] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:22:10,985 (GMT-5) [143] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:22:10,990 (GMT-5) [148] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:22:10,996 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:22:10,999 (GMT-5) [152] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:22:11,033 (GMT-5) [143] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:22:11,035 (GMT-5) [149] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:22:11,035 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:22:11,040 (GMT-5) [152] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:22:11,044 (GMT-5) [148] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:22:11,799 (GMT-5) [149] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:22:11,854 (GMT-5) [149] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:22:11,900 (GMT-5) [149] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:02,695 (GMT-5) [159] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:02,759 (GMT-5) [159] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:02,804 (GMT-5) [159] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:03,226 (GMT-5) [165] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:03,257 (GMT-5) [160] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:03,265 (GMT-5) [171] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:03,267 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:03,273 (GMT-5) [165] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:03,289 (GMT-5) [169] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:03,296 (GMT-5) [166] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:03,346 (GMT-5) [165] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:03,402 (GMT-5) [171] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:03,402 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:03,412 (GMT-5) [160] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:03,434 (GMT-5) [169] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:03,440 (GMT-5) [166] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:03,448 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:03,448 (GMT-5) [171] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:03,467 (GMT-5) [160] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:03,479 (GMT-5) [169] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:03,482 (GMT-5) [166] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:04,044 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:04,090 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:04,133 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:06,569 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:06,615 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:06,656 (GMT-5) [6] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results
+2015-01-10 10:37:07,608 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.LoadOperation - Loading document [UserAuths/354] from https://diver.ravenhq.com/databases/coryt-learningloop;
+2015-01-10 10:37:07,679 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Executing query 'UserAuthId:354' on index 'UserAuth/By/UserAuthDetails' in 'https://diver.ravenhq.com/databases/coryt-learningloop;'
+2015-01-10 10:37:07,733 (GMT-5) [172] DEBUG Raven.Client.Document.SessionOperations.QueryOperation - Query returned 0/0 results

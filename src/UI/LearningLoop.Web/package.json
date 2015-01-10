@@ -1,21 +1,12 @@
 {
-    "name": "LearningLoop",
+    "name": "LearningLoop.Web",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
     "author": "= <=>",
     "license": "ISC",
-    "private":  true,
+    "private": true,
     "dependencies": {
-        "react": "*",
-        "react-tools": "*"
-    },
-    "jest": {
-        "rootDir": "",
-        "scriptPreprocessor": "uitests/preprocessor.js",
-        "testFileExtensions": [ "js" ],
-        "unmockedModulePathPatterns": [ "react" ],
-        "testDirectoryName": "uitests/unit"
     },
     "devDependencies": {
         "grunt-exec": "~0.4.6",
@@ -32,7 +23,6 @@
         "gulp-grunt": "~0.5.2",
         "gulp-minify-css": "~0.3.8",
         "gulp-useref": "~1.0.1",
-        "gulp-newer": "~0.3.0",
-        "gulp-react": "~2.0.0"
+        "gulp-newer": "~0.3.0"
     }
 }

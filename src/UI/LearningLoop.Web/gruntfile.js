@@ -19,7 +19,6 @@ module.exports = function (grunt) {
     var gulpif = require('gulp-if');
     var minifyCss = require('gulp-minify-css');
     var gulpReplace = require('gulp-replace');
-    var react = require('gulp-react');
     var webRoot = 'wwwroot/';
 
     //Deployment config
@@ -27,9 +26,6 @@ module.exports = function (grunt) {
 
     // Project configuration.
     grunt.initConfig({
-        exec: {
-            jest: 'jest'
-        },
         msbuild: {
             release: {
                 src: ['LearningLoop.Web.csproj'],
@@ -111,15 +107,14 @@ module.exports = function (grunt) {
                     '!./wwwroot/bin/**/*.*', //Don't delete dlls
                     '!./wwwroot/**/*.asax', //Don't delete asax
                     '!./wwwroot/**/*.config', //Don't delete config
-                    '!./wwwroot/appsettings.txt' //Don't delete deploy settings
+                    '!./wwwroot/appsettings.txt', //Don't delete deploy settings
                 ], { read: false })
                     .pipe(rimraf());
             },
-            'wwwroot-copy-partials': function () {
-                var partialsDest = webRoot + 'partials';
-                return gulp.src('partials/**/*.html')
-                    .pipe(newer(partialsDest))
-                    .pipe(gulp.dest(partialsDest));
+            'wwwroot-copy-semantic-resources': function () {
+                return gulp.src('./bower_components/semantic-ui/dist/themes/**/*.*')
+                    .pipe(newer(webRoot + 'lib/css/themes/'))
+                    .pipe(gulp.dest(webRoot + 'lib/css/themes/'));
             },
             'wwwroot-copy-fonts': function () {
                 return gulp.src('./bower_components/bootstrap/dist/fonts/*.*')
@@ -131,17 +126,30 @@ module.exports = function (grunt) {
             },
             'wwwroot-bundle': function () {
                 var assets = useref.assets();
-                var checkIfJsx = function (file) {
-                    return file.relative.indexOf('.jsx.js') !== -1;
-                }
+               
                 return gulp.src('default.cshtml')
                     .pipe(assets)
-                    .pipe(gulpif('*.jsx.js', react()))
-                    .pipe(gulpif(checkIfJsx, uglify()))
+                    .pipe(gulpif('*.js', uglify()))
                     .pipe(gulpif('*.css', minifyCss()))
                     .pipe(assets.restore())
                     .pipe(useref())
                     .pipe(gulp.dest(webRoot));
+            },
+            'wwwroot-bundle-razor-templates': function () {
+                var assets = useref.assets({ searchPath: './' });
+
+                return gulp.src('Views/Shared/ServerHtml.cshtml')
+                    .pipe(assets)
+                    .pipe(gulpif('*.js', uglify()))
+                    .pipe(gulpif('*.css', minifyCss()))
+                    .pipe(assets.restore())
+                    .pipe(useref())
+                    .pipe(gulp.dest(webRoot));
+            },
+            'wwwroot-copy-razor-views': function () {
+                return gulp.src('Views/**/*.cshtml')
+                    .pipe(newer(webRoot + 'Views/'))
+                    .pipe(gulp.dest(webRoot + 'Views/'));
             },
             'wwwroot-copy-deploy-files': function () {
                 return gulp.src('./wwwroot_build/deploy/*.*')
@@ -157,7 +165,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-msbuild');
     grunt.loadNpmTasks('grunt-nuget');
 
-    grunt.registerTask('01-run-tests', ['exec:jest']);
+    grunt.registerTask('01-run-tests', []);
     grunt.registerTask('02-package-server', [
         'nugetrestore',
         'msbuild:release',
@@ -169,10 +177,13 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask('03-package-client', [
         'gulp:wwwroot-clean-client-assets',
-        'gulp:wwwroot-copy-partials',
+        'gulp:wwwroot-copy-semantic-resources',
         'gulp:wwwroot-copy-fonts',
         'gulp:wwwroot-copy-images',
-        'gulp:wwwroot-bundle'
+        'gulp:wwwroot-copy-razor-views',
+        'gulp:wwwroot-copy-deploy-files',
+        'gulp:wwwroot-bundle',
+        'gulp:wwwroot-bundle-razor-templates'
     ]);
 
     grunt.registerTask('build', ['02-package-server', '03-package-client']);

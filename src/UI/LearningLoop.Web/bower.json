@@ -1,5 +1,5 @@
 {
-    "name": "LearningLoop",
+    "name": "LearningLoop.Web",
     "version": "0.0.1",
     "authors": [
         "Cory Taylor"
@@ -7,16 +7,13 @@
     "license": "None",
     "private": true,
     "dependencies": {
-        "react": "~0.12.1",
         "bootstrap": "~3.3.1",
-        "modernizr": "~2.8.3"
+        "modernizr": "~2.8.3",
+        "semantic-ui": "~1.5.2"
     },
     "ignore": [
         "**/.*",
         "node_modules",
-        "bower_components",
-        "test",
-        "uitests"
+        "bower_components"
     ]
-
 }

@@ -86,25 +86,6 @@ namespace LearningLoop.Infrastructure.Persistence
                 }
             };
 
-            var authRepo = (IUserAuthRepository)container.Resolve<IAuthRepository>();
-
-            try
-            {
-                authRepo.CreateUserAuth(new CustomUserAuth
-                {
-                    Custom = "CustomUserAuth",
-                    DisplayName = "Cory CT",
-                    FirstName = "Cory",
-                    LastName = "Taylor",
-                    FullName = "Cory Taylor",
-                    Email = "cory.c.taylor@gmail.com",
-                }, "test");
-            }
-            catch
-            {
-                // ignored
-            }
-
             using (var session = DocumentStore.OpenSession())
             {
                 classes.ForEach(c =>

@@ -14,7 +14,7 @@
     <RootNamespace>LearningLoop.Web</RootNamespace>
     <AssemblyName>LearningLoop.Web</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -66,7 +66,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\RavenDB.Client.2.5.2946\lib\net45\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
-    <Reference Include="ServiceStack, Version=4.0.35.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ServiceStack, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\ServiceStack.4.0.35\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
@@ -134,10 +134,6 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Web.Razor">
-      <HintPath>..\..\packages\ServiceStack.Razor.4.0.35\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -149,22 +145,26 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\app.css" />
+    <Content Include="css\homepage.css" />
+    <Content Include="Global.asax" />
+    <Content Include="img\facebook_normal.png" />
+    <Content Include="img\github_normal.png" />
+    <Content Include="img\no-profile64.png" />
+    <Content Include="img\twitter_normal.png" />
+    <Content Include="js\homepage.js" />
     <Content Include="js\jsonviewer.js" />
     <Content Include="gruntfile.js" />
     <Content Include="packages.config" />
     <Content Include="appSettings.config" />
     <Content Include="package.json" />
     <Content Include="bower.json" />
-    <Content Include="js\components\hello.jsx" />
-    <Content Include="js\app.jsx" />
     <Content Include="wwwroot_build\deploy\appsettings.txt" />
     <Content Include="wwwroot_build\README.txt" />
     <None Include="Scripts\_references.js" />
-    <Content Include="uitests\preprocessor.js" />
-    <Content Include="uitests\README.txt" />
-    <Content Include="uitests\unit\hello-test.js" />
     <Content Include="default.cshtml" />
-    <Content Include="auth.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home.cshtml" />
+    <Content Include="Views\User\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -179,21 +179,17 @@
     <Content Include="wwwroot_build\publish\config.json" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\AppHost.cs" />
-    <Compile Include="App_Start\Plugins\CustomCredentialsAuthProvider.cs" />
-    <Compile Include="App_Start\Plugins\CustomRegisterPlugin.cs" />
     <Compile Include="App_Start\DependencyRegistrar.cs" />
     <Compile Include="App_Start\RavenDBBootstrap.cs" />
-    <Compile Include="App_Start\PageBase.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HtmlExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,11 +216,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>4374</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4374/</IISUrl>
+          <IISUrl>http://localhost</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

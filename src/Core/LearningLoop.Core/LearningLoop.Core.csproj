@@ -70,6 +70,7 @@
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -83,13 +84,11 @@
     <Compile Include="Domain\Classroom.cs" />
     <Compile Include="IoC\SimpleInjectorAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebServices\AuthenticationService.cs" />
-    <Compile Include="WebServices\ClassroomWebService.cs" />
+    <Compile Include="WebServices\AccountWebService.cs" />
     <Compile Include="WebServices\Types\ClassroomCollectionDTO.cs" />
     <Compile Include="WebServices\Types\ClassroomViewModel.cs" />
-    <Compile Include="WebServices\Types\CustomUserAuth.cs" />
-    <Compile Include="WebServices\Types\CustomUserAuthDetails.cs" />
-    <Compile Include="WebServices\Types\CustomUserSession.cs" />
+    <Compile Include="WebServices\Types\UserSession.cs" />
+    <Compile Include="WebServices\UserProfileService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\" />
