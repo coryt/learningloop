@@ -1,5 +1,5 @@
  /*
- * # Semantic UI
+ * # Semantic UI - 1.6.2
  * https://github.com/Semantic-Org/Semantic-UI
  * http://www.semantic-ui.com/
  *
@@ -1264,7 +1264,7 @@
 .ui.grid > .white.row,
 .ui.grid .white.column {
   background-color: #ffffff !important;
-  color: #212121;
+  color: rgba(0, 0, 0, 0.8);
 }
 .ui.grid > .row > .white.column {
   margin-top: -1rem;
@@ -1285,7 +1285,7 @@
 }
 .ui.grid > .blue.row,
 .ui.grid .blue.column {
-  background-color: #2196f3 !important;
+  background-color: #3b83c0 !important;
   color: #ffffff;
 }
 .ui.grid > .row > .blue.column {
@@ -1296,7 +1296,7 @@
 }
 .ui.grid > .green.row,
 .ui.grid .green.column {
-  background-color: #4caf50 !important;
+  background-color: #5bbd72 !important;
   color: #ffffff;
 }
 .ui.grid > .row > .green.column {
@@ -1307,7 +1307,7 @@
 }
 .ui.grid > .orange.row,
 .ui.grid .orange.column {
-  background-color: #ff9800 !important;
+  background-color: #e07b53 !important;
   color: #ffffff;
 }
 .ui.grid > .row > .orange.column {
@@ -1318,7 +1318,7 @@
 }
 .ui.grid > .pink.row,
 .ui.grid .pink.column {
-  background-color: #e91e63 !important;
+  background-color: #d9499a !important;
   color: #ffffff;
 }
 .ui.grid > .row > .pink.column {
@@ -1329,7 +1329,7 @@
 }
 .ui.grid > .purple.row,
 .ui.grid .purple.column {
-  background-color: #9c27b0 !important;
+  background-color: #564f8a !important;
   color: #ffffff;
 }
 .ui.grid > .row > .purple.column {
@@ -1340,7 +1340,7 @@
 }
 .ui.grid > .red.row,
 .ui.grid .red.column {
-  background-color: #f44336 !important;
+  background-color: #d95c5c !important;
   color: #ffffff;
 }
 .ui.grid > .row > .red.column {
@@ -1351,7 +1351,7 @@
 }
 .ui.grid > .teal.row,
 .ui.grid .teal.column {
-  background-color: #1de9b6 !important;
+  background-color: #00b5ad !important;
   color: #ffffff;
 }
 .ui.grid > .row > .teal.column {
@@ -1362,7 +1362,7 @@
 }
 .ui.grid > .yellow.row,
 .ui.grid .yellow.column {
-  background-color: #ffeb3b !important;
+  background-color: #f2c61f !important;
   color: #ffffff;
 }
 .ui.grid > .row > .yellow.column {
@@ -1564,8 +1564,8 @@
   .ui.stackable.grid {
     display: block !important;
     width: auto;
-    margin-left: 0em !important;
-    margin-right: 0em !important;
+    margin-left: -1rem !important;
+    margin-right: -1rem !important;
     padding: 0em;
   }
   .ui.stackable.grid > .row > .wide.column,
@@ -1584,9 +1584,9 @@
     margin: 0em;
     padding: 0em;
   }
-  .ui.stackable.grid .column > .ui.stackable.grid {
-    margin-left: -1rem !important;
-    margin-right: -1rem !important;
+  .ui.stackable.page.grid {
+    margin-left: 0em !important;
+    margin-right: 0em !important;
   }
   
 /* Equal Height Stackable */

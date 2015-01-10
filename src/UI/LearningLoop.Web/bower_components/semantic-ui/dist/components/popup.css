@@ -1,5 +1,5 @@
  /*
- * # Semantic UI
+ * # Semantic UI - 1.6.2
  * https://github.com/Semantic-Org/Semantic-UI
  * http://www.semantic-ui.com/
  *
@@ -22,23 +22,20 @@
   right: 0px;
   z-index: 900;
   border: 1px solid #cccccc;
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
   max-width: 250px;
   background-color: #ffffff;
   padding: 0.833em 1em;
   font-weight: normal;
   font-style: normal;
-  color: #212121;
-  border-radius: 2px;
+  color: rgba(0, 0, 0, 0.8);
+  border-radius: 0.2857rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .ui.popup > .header {
   padding: 0em;
-  font-family: 'Roboto', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-family: 'Lato', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-size: 1.125em;
-  line-height: 1.33em;
+  line-height: 1.2;
   font-weight: bold;
 }
 .ui.popup > .header + .content {

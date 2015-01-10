@@ -1,5 +1,5 @@
  /*
- * # Semantic UI
+ * # Semantic UI - 1.6.2
  * https://github.com/Semantic-Org/Semantic-UI
  * http://www.semantic-ui.com/
  *
@@ -53,7 +53,7 @@
   text-align: left;
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(39, 41, 43, 0.15);
-  border-radius: 0em 0em 2px 2px;
+  border-radius: 0em 0em 0.2857rem 0.2857rem;
   -webkit-transition: opacity 0.2s ease;
           transition: opacity 0.2s ease;
   z-index: 11;
@@ -105,7 +105,7 @@
   height: auto;
   border-top: none;
   line-height: 1.2em;
-  color: #212121;
+  color: rgba(0, 0, 0, 0.8);
   padding: 0.65rem 1.25rem !important;
   font-size: 1rem;
   text-transform: none;
@@ -193,7 +193,7 @@
   left: 100% !important;
   right: auto !important;
   margin: 0em 0em 0em -0.5em !important;
-  border-radius: 0em 2px 2px 0em !important;
+  border-radius: 0em 0.2857rem 0.2857rem 0em !important;
   z-index: 21 !important;
 }
 
@@ -318,10 +318,10 @@
   background: #ffffff;
   display: inline-block;
   padding: 0.8em 1.1em;
-  color: #212121;
+  color: rgba(0, 0, 0, 0.8);
   box-shadow: none;
   border: 1px solid rgba(39, 41, 43, 0.15);
-  border-radius: 2px;
+  border-radius: 0.2857rem;
   -webkit-transition: border-radius 0.1s ease, width 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
           transition: border-radius 0.1s ease, width 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
 }
@@ -469,12 +469,12 @@ select.ui.dropdown {
 
 /* Search Dropdown */
 .ui.search.dropdown > input.search {
-  background: none transparent;
-  border: none;
-  box-shadow: none;
+  background: none transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0em !important;
   cursor: pointer;
   position: absolute;
-  border-radius: 0em !important;
   top: 0em;
   left: 0em;
   width: 100%;
@@ -544,7 +544,7 @@ select.ui.dropdown {
 .ui.inline.dropdown .menu {
   cursor: auto;
   margin-top: 0.25em;
-  border-radius: 2px;
+  border-radius: 0.2857rem;
 }
 
 
@@ -777,7 +777,7 @@ select.ui.dropdown {
   left: 0;
   right: auto;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
-  border-radius: 2px;
+  border-radius: 0.2857rem;
 }
 .ui.floating.dropdown > .menu {
   margin-top: 0.5em !important;
@@ -790,7 +790,7 @@ select.ui.dropdown {
 .ui.pointing.dropdown > .menu {
   top: 100%;
   margin-top: 0.75em;
-  border-radius: 2px;
+  border-radius: 0.2857rem;
 }
 .ui.pointing.dropdown > .menu:after {
   display: block;
