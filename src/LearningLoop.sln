@@ -8,19 +8,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{CB125D0E-4
 		Core\Core.Readme.txt = Core\Core.Readme.txt
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{3DF08ACA-49FF-46C4-A762-843B7DBC9D2C}"
-	ProjectSection(SolutionItems) = preProject
-		Infrastructure\Infrastructure.Readme.txt = Infrastructure\Infrastructure.Readme.txt
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{A16DF442-AF38-4FD5-B936-270679448060}"
 	ProjectSection(SolutionItems) = preProject
 		UI\UI.Readme.txt = UI\UI.Readme.txt
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningLoop.Core", "Core\LearningLoop.Core\LearningLoop.Core.csproj", "{4CAD76D0-1F3A-4D9A-9649-8CFC655248D8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningLoop.Infrastructure", "Infrastructure\LearningLoop.Infrastructure\LearningLoop.Infrastructure.csproj", "{F6E02F77-BB00-48F5-AA4B-FA2B628E8A6A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningLoop.Web", "UI\LearningLoop.Web\LearningLoop.Web.csproj", "{F80CB204-B4AA-4366-BC0B-6A434AEFB3EE}"
 EndProject
@@ -41,10 +34,6 @@ Global
 		{4CAD76D0-1F3A-4D9A-9649-8CFC655248D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CAD76D0-1F3A-4D9A-9649-8CFC655248D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4CAD76D0-1F3A-4D9A-9649-8CFC655248D8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F6E02F77-BB00-48F5-AA4B-FA2B628E8A6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F6E02F77-BB00-48F5-AA4B-FA2B628E8A6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F6E02F77-BB00-48F5-AA4B-FA2B628E8A6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F6E02F77-BB00-48F5-AA4B-FA2B628E8A6A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F80CB204-B4AA-4366-BC0B-6A434AEFB3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F80CB204-B4AA-4366-BC0B-6A434AEFB3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F80CB204-B4AA-4366-BC0B-6A434AEFB3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -55,7 +44,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4CAD76D0-1F3A-4D9A-9649-8CFC655248D8} = {CB125D0E-4E51-4D88-BAC3-9449CCB148C6}
-		{F6E02F77-BB00-48F5-AA4B-FA2B628E8A6A} = {3DF08ACA-49FF-46C4-A762-843B7DBC9D2C}
 		{F80CB204-B4AA-4366-BC0B-6A434AEFB3EE} = {A16DF442-AF38-4FD5-B936-270679448060}
 	EndGlobalSection
 EndGlobal

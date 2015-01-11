@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using ServiceStack;
 using ServiceStack.Auth;
+using ServiceStack.Web;
 
 namespace LearningLoop.Core.WebServices.Types
 {
@@ -16,6 +17,13 @@ namespace LearningLoop.Core.WebServices.Types
             base.OnAuthenticated(authService, session, tokens, authInfo);
 
             this.ProfileUrl64 = session.GetProfileUrl();
+        }
+
+        public override void OnCreated(IRequest httpReq)
+        {
+            base.OnCreated(httpReq);
+
+
         }
     }
 }

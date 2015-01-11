@@ -2,7 +2,7 @@
 using ServiceStack.Configuration;
 using SimpleInjector;
 
-namespace LearningLoop.Core.IoC
+namespace LearningLoop.Core.Infrastructure.IoC
 {
     public class SimpleInjectorAdapter : IContainerAdapter
     {

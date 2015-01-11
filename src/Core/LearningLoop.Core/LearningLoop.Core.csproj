@@ -33,6 +33,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MediatR">
+      <HintPath>..\..\packages\MediatR.1.0.0.0\lib\portable-net45+win+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\MediatR.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight">
+      <HintPath>..\..\packages\RavenDB.Client.2.5.2946\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
     <Reference Include="ServiceStack">
       <HintPath>..\..\packages\ServiceStack.4.0.35\lib\net40\ServiceStack.dll</HintPath>
     </Reference>
@@ -69,6 +78,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
@@ -79,10 +89,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DomainServices\IClassroomRepository.cs" />
-    <Compile Include="DomainServices\IRepository.cs" />
+    <Compile Include="DomainServices\Commands\AddStudentToRosterHandler.cs" />
     <Compile Include="Domain\Classroom.cs" />
-    <Compile Include="IoC\SimpleInjectorAdapter.cs" />
+    <Compile Include="Domain\Commands\AddStudentToRosterCommand.cs" />
+    <Compile Include="Domain\Mappings\Mapper.cs" />
+    <Compile Include="Domain\Commands\CreateClassroomCommand.cs" />
+    <Compile Include="DomainServices\Commands\CreateClassroomHandler.cs" />
+    <Compile Include="Infrastructure\ImageProcessing.cs" />
+    <Compile Include="Infrastructure\IoC\SimpleInjectorAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebServices\AccountWebService.cs" />
     <Compile Include="WebServices\Types\ClassroomCollectionDTO.cs" />
@@ -91,7 +105,8 @@
     <Compile Include="WebServices\UserProfileService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
+    <Folder Include="DomainServices\Queries\" />
+    <Folder Include="Domain\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
