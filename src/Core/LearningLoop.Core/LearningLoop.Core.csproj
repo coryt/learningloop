@@ -95,6 +95,7 @@
     <Compile Include="Domain\Mappings\Mapper.cs" />
     <Compile Include="Domain\Commands\CreateClassroomCommand.cs" />
     <Compile Include="DomainServices\Commands\CreateClassroomHandler.cs" />
+    <Compile Include="Domain\Student.cs" />
     <Compile Include="Infrastructure\ImageProcessing.cs" />
     <Compile Include="Infrastructure\IoC\SimpleInjectorAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
