@@ -1,5 +1,5 @@
 /*!
- * Knockout JavaScript library v3.2.0
+ * Knockout JavaScript library v3.3.0-alpha
  * (c) Steven Sanderson - http://knockoutjs.com/
  * License: MIT (http://www.opensource.org/licenses/mit-license.php)
  */
@@ -46,7 +46,7 @@ ko.exportSymbol = function(koPath, object) {
 ko.exportProperty = function(owner, publicName, object) {
     owner[publicName] = object;
 };
-ko.version = "3.2.0";
+ko.version = "3.3.0-alpha";
 
 ko.exportSymbol('version', ko.version);
 ko.utils = (function () {
@@ -283,7 +283,7 @@ ko.utils = (function () {
 
                 // Rule [A]
                 while (continuousNodeArray.length && continuousNodeArray[0].parentNode !== parentNode)
-                    continuousNodeArray.shift();
+                    continuousNodeArray.splice(0, 1);
 
                 // Rule [B]
                 if (continuousNodeArray.length > 1) {
@@ -601,10 +601,19 @@ if (!Function.prototype['bind']) {
     // Function.prototype.bind is a standard part of ECMAScript 5th Edition (December 2009, http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-262.pdf)
     // In case the browser doesn't implement it natively, provide a JavaScript implementation. This implementation is based on the one in prototype.js
     Function.prototype['bind'] = function (object) {
-        var originalFunction = this, args = Array.prototype.slice.call(arguments), object = args.shift();
-        return function () {
-            return originalFunction.apply(object, args.concat(Array.prototype.slice.call(arguments)));
-        };
+        var originalFunction = this;
+        if (arguments.length === 1) {
+            return function () {
+                return originalFunction.apply(object, arguments);
+            };
+        } else {
+            var partialArgs = Array.prototype.slice.call(arguments, 1);
+            return function () {
+                var args = partialArgs.slice(0);
+                args.push.apply(args, arguments);
+                return originalFunction.apply(object, args);
+            };
+        }
     };
 }
 
@@ -1115,12 +1124,16 @@ var ko_subscribable_fn = {
         return this._subscriptions[event] && this._subscriptions[event].length;
     },
 
-    getSubscriptionsCount: function () {
-        var total = 0;
-        ko.utils.objectForEach(this._subscriptions, function(eventName, subscriptions) {
-            total += subscriptions.length;
-        });
-        return total;
+    getSubscriptionsCount: function (event) {
+        if (event) {
+            return this._subscriptions[event] && this._subscriptions[event].length || 0;
+        } else {
+            var total = 0;
+            ko.utils.objectForEach(this._subscriptions, function(eventName, subscriptions) {
+                total += subscriptions.length;
+            });
+            return total;
+        }
     },
 
     isDifferent: function(oldValue, newValue) {
@@ -1457,15 +1470,16 @@ ko.extenders['trackArrayChanges'] = function(target) {
             // Compute the diff and issue notifications, but only if someone is listening
             if (target.hasSubscriptionsForEvent(arrayChangeEventName)) {
                 var changes = getChanges(previousContents, currentContents);
-                if (changes.length) {
-                    target['notifySubscribers'](changes, arrayChangeEventName);
-                }
             }
 
             // Eliminate references to the old, removed items, so they can be GCed
             previousContents = currentContents;
             cachedDiff = null;
             pendingNotifications = 0;
+
+            if (changes && changes.length) {
+                target['notifySubscribers'](changes, arrayChangeEventName);
+            }
         });
     }
 
@@ -1627,7 +1641,7 @@ ko.computed = ko.dependentObservable = function (evaluatorFunctionOrOptions, eva
                 var dependencyTracking = {};
                 ko.dependencyDetection.begin({
                     callback: function (subscribable, id) {
-                        if (!dependencyTracking[id]) {
+                        if (!_isDisposed && !dependencyTracking[id]) {
                             dependencyTracking[id] = 1;
                             ++_dependenciesCount;
                         }
@@ -1637,15 +1651,20 @@ ko.computed = ko.dependentObservable = function (evaluatorFunctionOrOptions, eva
                 });
                 _dependenciesCount = 0;
                 _latestValue = readFunction.call(evaluatorFunctionTarget);
+                if (DEBUG) dependentObservable._latestValue = _latestValue;
             } finally {
                 ko.dependencyDetection.end();
+                _needsEvaluation = false;
                 _isBeingEvaluated = false;
             }
         } else {
             try {
                 // Initially, we assume that none of the subscriptions are still being used (i.e., all are candidates for disposal).
                 // Then, during evaluation, we cross off any that are in fact still being used.
-                var disposalCandidates = _subscriptionsToDependencies, disposalCount = _dependenciesCount;
+                var disposalCandidates = _subscriptionsToDependencies,
+                    disposalCount = _dependenciesCount,
+                    isInitial = pure ? undefined : !_dependenciesCount;   // If we're evaluating when there are no previous dependencies, it must be the first time
+
                 ko.dependencyDetection.begin({
                     callback: function(subscribable, id) {
                         if (!_isDisposed) {
@@ -1662,7 +1681,7 @@ ko.computed = ko.dependentObservable = function (evaluatorFunctionOrOptions, eva
                         }
                     },
                     computed: dependentObservable,
-                    isInitial: pure ? undefined : !_dependenciesCount        // If we're evaluating when there are no previous dependencies, it must be the first time
+                    isInitial: isInitial
                 });
 
                 _subscriptionsToDependencies = {};
@@ -1685,14 +1704,18 @@ ko.computed = ko.dependentObservable = function (evaluatorFunctionOrOptions, eva
                 }
 
                 if (dependentObservable.isDifferent(_latestValue, newValue)) {
-                    dependentObservable["notifySubscribers"](_latestValue, "beforeChange");
+                    notify(_latestValue, "beforeChange");
 
                     _latestValue = newValue;
                     if (DEBUG) dependentObservable._latestValue = _latestValue;
 
                     if (suppressChangeNotification !== true) {  // Check for strict true value since setTimeout in Firefox passes a numeric value to the function
-                        dependentObservable["notifySubscribers"](_latestValue);
+                        notify(_latestValue);
                     }
+                }
+
+                if (isInitial) {
+                    notify(_latestValue, "awake");
                 }
             } finally {
                 _isBeingEvaluated = false;
@@ -1715,22 +1738,26 @@ ko.computed = ko.dependentObservable = function (evaluatorFunctionOrOptions, eva
         } else {
             // Reading the value
             ko.dependencyDetection.registerDependency(dependentObservable);
-            if (_needsEvaluation)
+            if (isSleeping || _needsEvaluation)
                 evaluateImmediate(true /* suppressChangeNotification */);
             return _latestValue;
         }
     }
 
     function peek() {
-        // Peek won't re-evaluate, except to get the initial value when "deferEvaluation" is set, or while the computed is sleeping.
+        // Peek won't re-evaluate, except while the computed is sleeping or to get the initial value when "deferEvaluation" is set.
         // Those are the only times that both of these conditions will be satisfied.
-        if (_needsEvaluation && !_dependenciesCount)
+        if (isSleeping || (_needsEvaluation && !_dependenciesCount))
             evaluateImmediate(true /* suppressChangeNotification */);
         return _latestValue;
     }
 
     function isActive() {
         return _needsEvaluation || _dependenciesCount > 0;
+    }
+
+    function notify(value, event) {
+        dependentObservable["notifySubscribers"](value, event);
     }
 
     // By here, "options" is always non-null
@@ -1751,7 +1778,7 @@ ko.computed = ko.dependentObservable = function (evaluatorFunctionOrOptions, eva
 
     dependentObservable.peek = peek;
     dependentObservable.getDependenciesCount = function () { return _dependenciesCount; };
-    dependentObservable.hasWriteFunction = typeof options["write"] === "function";
+    dependentObservable.hasWriteFunction = typeof writeFunction === "function";
     dependentObservable.dispose = function () { dispose(); };
     dependentObservable.isActive = isActive;
 
@@ -1773,24 +1800,31 @@ ko.computed = ko.dependentObservable = function (evaluatorFunctionOrOptions, eva
     if (options['pure']) {
         pure = true;
         isSleeping = true;     // Starts off sleeping; will awake on the first subscription
-        dependentObservable.beforeSubscriptionAdd = function () {
+        dependentObservable.beforeSubscriptionAdd = function (event) {
             // If asleep, wake up the computed and evaluate to register any dependencies.
-            if (isSleeping) {
+            if (event == 'change' && isSleeping) {
                 isSleeping = false;
+                _needsEvaluation = true;
                 evaluateImmediate(true /* suppressChangeNotification */);
+                if (!_isDisposed) {     // test since evaluateImmediate could trigger disposal
+                    notify(_latestValue, "awake");
+                }
             }
         }
-        dependentObservable.afterSubscriptionRemove = function () {
-            if (!dependentObservable.getSubscriptionsCount()) {
+        dependentObservable.afterSubscriptionRemove = function (event) {
+            if (event == 'change' && !dependentObservable.hasSubscriptionsForEvent('change')) {
                 disposeAllSubscriptionsToDependencies();
-                isSleeping = _needsEvaluation = true;
+                isSleeping = true;
+                notify(undefined, "asleep");
             }
         }
     } else if (options['deferEvaluation']) {
         // This will force a computed with deferEvaluation to evaluate when the first subscriptions is registered.
-        dependentObservable.beforeSubscriptionAdd = function () {
-            peek();
-            delete dependentObservable.beforeSubscriptionAdd;
+        dependentObservable.beforeSubscriptionAdd = function (event) {
+            if (event == 'change' || event == 'beforeChange') {
+                peek();
+                delete dependentObservable.beforeSubscriptionAdd;
+            }
         }
     }
 
@@ -2978,8 +3012,15 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
             var cachedDefinition = getObjectOwnProperty(loadedDefinitionsCache, componentName);
             if (cachedDefinition) {
                 // It's already loaded and cached. Reuse the same definition object.
-                // Note that for API consistency, even cache hits complete asynchronously.
-                setTimeout(function() { callback(cachedDefinition) }, 0);
+                // Note that for API consistency, even cache hits complete asynchronously by default.
+                // You can bypass this by putting synchronous:true on your component config.
+                if (cachedDefinition.isSynchronousComponent) {
+                    ko.dependencyDetection.ignore(function() { // See comment in loaderRegistryBehaviors.js for reasoning
+                        callback(cachedDefinition.definition);
+                    });
+                } else {
+                    setTimeout(function() { callback(cachedDefinition.definition); }, 0);
+                }
             } else {
                 // Join the loading process that is already underway, or start a new one.
                 loadComponentAndNotify(componentName, callback);
@@ -3003,14 +3044,22 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
         if (!subscribable) {
             // It's not started loading yet. Start loading, and when it's done, move it to loadedDefinitionsCache.
             subscribable = loadingSubscribablesCache[componentName] = new ko.subscribable();
-            beginLoadingComponent(componentName, function(definition) {
-                loadedDefinitionsCache[componentName] = definition;
+            subscribable.subscribe(callback);
+
+            beginLoadingComponent(componentName, function(definition, config) {
+                var isSynchronousComponent = !!(config && config['synchronous']);
+                loadedDefinitionsCache[componentName] = { definition: definition, isSynchronousComponent: isSynchronousComponent };
                 delete loadingSubscribablesCache[componentName];
 
                 // For API consistency, all loads complete asynchronously. However we want to avoid
                 // adding an extra setTimeout if it's unnecessary (i.e., the completion is already
                 // async) since setTimeout(..., 0) still takes about 16ms or more on most browsers.
-                if (completedAsync) {
+                //
+                // You can bypass the 'always synchronous' feature by putting the synchronous:true
+                // flag on your component configuration when you register it.
+                if (completedAsync || isSynchronousComponent) {
+                    // Note that notifySubscribers ignores any dependencies read within the callback.
+                    // See comment in loaderRegistryBehaviors.js for reasoning
                     subscribable['notifySubscribers'](definition);
                 } else {
                     setTimeout(function() {
@@ -3019,8 +3068,9 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
                 }
             });
             completedAsync = true;
+        } else {
+            subscribable.subscribe(callback);
         }
-        subscribable.subscribe(callback);
     }
 
     function beginLoadingComponent(componentName, callback) {
@@ -3028,14 +3078,14 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
             if (config) {
                 // We have a config, so now load its definition
                 getFirstResultFromLoaders('loadComponent', [componentName, config], function(definition) {
-                    callback(definition);
+                    callback(definition, config);
                 });
             } else {
                 // The component has no config - it's unknown to all the loaders.
                 // Note that this is not an error (e.g., a module loading error) - that would abort the
                 // process and this callback would not run. For this callback to run, all loaders must
                 // have confirmed they don't know about this component.
-                callback(null);
+                callback(null, null);
             }
         });
     }
@@ -3364,18 +3414,26 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
                     return ko.computed(paramValue, null, { disposeWhenNodeIsRemoved: elem });
                 }),
                 result = ko.utils.objectMap(rawParamComputedValues, function(paramValueComputed, paramName) {
+                    var paramValue = paramValueComputed.peek();
                     // Does the evaluation of the parameter value unwrap any observables?
                     if (!paramValueComputed.isActive()) {
                         // No it doesn't, so there's no need for any computed wrapper. Just pass through the supplied value directly.
                         // Example: "someVal: firstName, age: 123" (whether or not firstName is an observable/computed)
-                        return paramValueComputed.peek();
+                        return paramValue;
                     } else {
                         // Yes it does. Supply a computed property that unwraps both the outer (binding expression)
                         // level of observability, and any inner (resulting model value) level of observability.
-                        // This means the component doesn't have to worry about multiple unwrapping.
-                        return ko.computed(function() {
-                            return ko.utils.unwrapObservable(paramValueComputed());
-                        }, null, { disposeWhenNodeIsRemoved: elem });
+                        // This means the component doesn't have to worry about multiple unwrapping. If the value is a
+                        // writable observable, the computed will also be writable and pass the value on to the observable.
+                        return ko.computed({
+                            'read': function() {
+                                return ko.utils.unwrapObservable(paramValueComputed());
+                            },
+                            'write': ko.isWriteableObservable(paramValue) && function(value) {
+                                paramValueComputed()(value);
+                            },
+                            disposeWhenNodeIsRemoved: elem
+                        });
                     }
                 });
 
@@ -3438,7 +3496,8 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
 
                     // Any in-flight loading operation is no longer relevant, so make sure we ignore its completion
                     currentLoadingOperationId = null;
-                };
+                },
+                originalChildNodes = ko.utils.makeArray(ko.virtualElements.childNodes(element));
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, disposeAssociatedComponentViewModel);
 
@@ -3472,8 +3531,11 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
                         throw new Error('Unknown component \'' + componentName + '\'');
                     }
                     cloneTemplateIntoElement(componentName, componentDefinition, element);
-                    var componentViewModel = createViewModel(componentDefinition, element, componentParams),
-                        childBindingContext = bindingContext['createChildContext'](componentViewModel);
+                    var componentViewModel = createViewModel(componentDefinition, element, originalChildNodes, componentParams),
+                        childBindingContext = bindingContext['createChildContext'](componentViewModel, /* dataItemAlias */ undefined, function(ctx) {
+                            ctx['$component'] = componentViewModel;
+                            ctx['$componentTemplateNodes'] = originalChildNodes;
+                        });
                     currentViewModel = componentViewModel;
                     ko.applyBindingsToDescendants(childBindingContext, element);
                 });
@@ -3495,10 +3557,10 @@ ko.exportSymbol('bindingProvider', ko.bindingProvider);
         ko.virtualElements.setDomNodeChildren(element, clonedNodesArray);
     }
 
-    function createViewModel(componentDefinition, element, componentParams) {
+    function createViewModel(componentDefinition, element, originalChildNodes, componentParams) {
         var componentViewModelFactory = componentDefinition['createViewModel'];
         return componentViewModelFactory
-            ? componentViewModelFactory.call(componentDefinition, componentParams, { element: element })
+            ? componentViewModelFactory.call(componentDefinition, componentParams, { 'element': element, 'templateNodes': originalChildNodes })
             : componentParams; // Template-only component
     }
 
@@ -3651,7 +3713,7 @@ ko.bindingHandlers['checkedValue'] = {
 ko.bindingHandlers['css'] = {
     'update': function (element, valueAccessor) {
         var value = ko.utils.unwrapObservable(valueAccessor());
-        if (typeof value == "object") {
+        if (value !== null && typeof value == "object") {
             ko.utils.objectForEach(value, function(className, shouldHaveClass) {
                 shouldHaveClass = ko.utils.unwrapObservable(shouldHaveClass);
                 ko.utils.toggleDomNodeCssClass(element, className, shouldHaveClass);
@@ -3986,7 +4048,7 @@ ko.bindingHandlers['options'] = {
         }
 
         var callback = setSelectionCallback;
-        if (allBindings['has']('optionsAfterRender')) {
+        if (allBindings['has']('optionsAfterRender') && typeof allBindings.get('optionsAfterRender') == "function") {
             callback = function(arrayEntry, newOptions) {
                 setSelectionCallback(arrayEntry, newOptions);
                 ko.dependencyDetection.ignore(allBindings.get('optionsAfterRender'), null, [newOptions[0], arrayEntry !== captionPlaceholder ? arrayEntry : undefined]);
@@ -4479,7 +4541,7 @@ ko.templateEngine.prototype['rewriteTemplate'] = function (template, rewriterCal
 ko.exportSymbol('templateEngine', ko.templateEngine);
 
 ko.templateRewriting = (function () {
-    var memoizeDataBindingAttributeSyntaxRegex = /(<([a-z]+\d*)(?:\s+(?!data-bind\s*=\s*)[a-z0-9\-]+(?:=(?:\"[^\"]*\"|\'[^\']*\'))?)*\s+)data-bind\s*=\s*(["'])([\s\S]*?)\3/gi;
+    var memoizeDataBindingAttributeSyntaxRegex = /(<([a-z]+\d*)(?:\s+(?!data-bind\s*=\s*)[a-z0-9\-]+(?:=(?:\"[^\"]*\"|\'[^\']*\'|[^>]*))?)*\s+)data-bind\s*=\s*(["'])([\s\S]*?)\3/gi;
     var memoizeVirtualContainerBindingSyntaxRegex = /<!--\s*ko\b\s*([\s\S]*?)\s*-->/g;
 
     function validateDataBindValuesForRewriting(keyValueArray) {
@@ -4826,6 +4888,10 @@ ko.exportSymbol('__tr_ambtns', ko.templateRewriting.applyMemoizedBindingsToNextS
             activateBindingsOnContinuousNodeArray(addedNodesArray, arrayItemContext);
             if (options['afterRender'])
                 options['afterRender'](addedNodesArray, arrayValue);
+
+            // release the "cache" variable, so that it can be collected by
+            // the GC when its value isn't used from within the bindings anymore.
+            arrayItemContext = null;
         };
 
         return ko.dependentObservable(function () {
@@ -4860,6 +4926,17 @@ ko.exportSymbol('__tr_ambtns', ko.templateRewriting.applyMemoizedBindingsToNextS
             if (typeof bindingValue == "string" || bindingValue['name']) {
                 // It's a named template - clear the element
                 ko.virtualElements.emptyNode(element);
+            } else if ('nodes' in bindingValue) {
+                // We've been given an array of DOM nodes. Save them as the template source.
+                // There is no known use case for the node array being an observable array (if the output
+                // varies, put that behavior *into* your template - that's what templates are for), and
+                // the implementation would be a mess, so assert that it's not observable.
+                var nodes = bindingValue['nodes'] || [];
+                if (ko.isObservable(nodes)) {
+                    throw new Error('The "nodes" option must be a plain, non-observable array.');
+                }
+                var container = ko.utils.moveCleanedNodesToContainerElement(nodes); // This also removes the nodes from their current parent
+                new ko.templateSources.anonymousTemplate(element)['nodes'](container);
             } else {
                 // It's an anonymous template - store the element contents, then clear the element
                 var templateNodes = ko.virtualElements.childNodes(element),

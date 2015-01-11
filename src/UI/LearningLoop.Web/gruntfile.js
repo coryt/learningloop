@@ -8,20 +8,22 @@
 
 
 module.exports = function (grunt) {
+    // Node modules
+    var vinylPaths = require('vinyl-paths'),
+        del = require('del');
+
+    // Gulp and plugins
     var path = require('path');
-    // include gulp
     var gulp = require('gulp');
-    // include plug-ins
-    var rimraf = require('gulp-rimraf');
     var uglify = require('gulp-uglify');
     var newer = require('gulp-newer');
     var useref = require('gulp-useref');
     var gulpif = require('gulp-if');
     var minifyCss = require('gulp-minify-css');
     var gulpReplace = require('gulp-replace');
-    var webRoot = 'wwwroot/';
 
     //Deployment config
+    var webRoot = 'wwwroot/';
     var config = require('./wwwroot_build/publish/config.json');
 
     // Project configuration.
@@ -79,7 +81,17 @@ module.exports = function (grunt) {
         gulp: {
             'wwwroot-clean-dlls': function () {
                 return gulp.src(webRoot + '/bin/**/*.*', { read: false })
-                    .pipe(rimraf());
+                    .pipe(vinylPaths(del));
+            },
+            'wwwroot-clean-client-assets': function () {
+                return gulp.src([
+                    webRoot + '**/*.*',
+                    '!./wwwroot/bin/**/*.*', //Don't delete dlls
+                    '!./wwwroot/**/*.asax', //Don't delete asax
+                    '!./wwwroot/**/*.config', //Don't delete config
+                    '!./wwwroot/appsettings.txt', //Don't delete deploy settings
+                ], { read: false })
+                    .pipe(vinylPaths(del));
             },
             'wwwroot-copy-bin': function () {
                 var binDest = webRoot + 'bin/';
@@ -101,16 +113,6 @@ module.exports = function (grunt) {
                     .pipe(newer(webRoot))
                     .pipe(gulp.dest(webRoot));
             },
-            'wwwroot-clean-client-assets': function () {
-                return gulp.src([
-                    webRoot + '**/*.*',
-                    '!./wwwroot/bin/**/*.*', //Don't delete dlls
-                    '!./wwwroot/**/*.asax', //Don't delete asax
-                    '!./wwwroot/**/*.config', //Don't delete config
-                    '!./wwwroot/appsettings.txt', //Don't delete deploy settings
-                ], { read: false })
-                    .pipe(rimraf());
-            },
             'wwwroot-copy-semantic-resources': function () {
                 return gulp.src('./bower_components/semantic-ui/dist/themes/**/*.*')
                     .pipe(newer(webRoot + 'lib/css/themes/'))
@@ -124,9 +126,19 @@ module.exports = function (grunt) {
                 return gulp.src('./img/*.*')
                     .pipe(gulp.dest(webRoot + 'img/'));
             },
+            'wwwroot-copy-razor-views': function () {
+                return gulp.src('Views/**/*.cshtml')
+                    .pipe(newer(webRoot + 'Views/'))
+                    .pipe(gulp.dest(webRoot + 'Views/'));
+            },
+            'wwwroot-copy-deploy-files': function () {
+                return gulp.src('./wwwroot_build/deploy/*.*')
+                    .pipe(newer(webRoot))
+                    .pipe(gulp.dest(webRoot));
+            },
             'wwwroot-bundle': function () {
                 var assets = useref.assets();
-               
+
                 return gulp.src('default.cshtml')
                     .pipe(assets)
                     .pipe(gulpif('*.js', uglify()))
@@ -144,16 +156,6 @@ module.exports = function (grunt) {
                     .pipe(gulpif('*.css', minifyCss()))
                     .pipe(assets.restore())
                     .pipe(useref())
-                    .pipe(gulp.dest(webRoot));
-            },
-            'wwwroot-copy-razor-views': function () {
-                return gulp.src('Views/**/*.cshtml')
-                    .pipe(newer(webRoot + 'Views/'))
-                    .pipe(gulp.dest(webRoot + 'Views/'));
-            },
-            'wwwroot-copy-deploy-files': function () {
-                return gulp.src('./wwwroot_build/deploy/*.*')
-                    .pipe(newer(webRoot))
                     .pipe(gulp.dest(webRoot));
             }
         }

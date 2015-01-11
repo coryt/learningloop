@@ -50,9 +50,13 @@
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MediatR">
+      <HintPath>..\..\packages\MediatR.1.0.0.0\lib\portable-net45+win+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\MediatR.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\..\packages\Portable.CommonServiceLocator.1.2.2\lib\net35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -161,6 +165,8 @@
     <Content Include="img\no-profile64.png" />
     <Content Include="img\stock-vector-children-face-set-138823955.jpg" />
     <Content Include="img\twitter_normal.png" />
+    <Content Include="js\components\home-page\home.html" />
+    <Content Include="js\components\home-page\home.js" />
     <Content Include="js\homepage.js" />
     <Content Include="gruntfile.js" />
     <Content Include="packages.config" />
@@ -207,13 +213,9 @@
       <Project>{4cad76d0-1f3a-4d9a-9649-8cfc655248d8}</Project>
       <Name>LearningLoop.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Infrastructure\LearningLoop.Infrastructure\LearningLoop.Infrastructure.csproj">
-      <Project>{f6e02f77-bb00-48f5-aa4b-fa2b628e8a6a}</Project>
-      <Name>LearningLoop.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <Folder Include="uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

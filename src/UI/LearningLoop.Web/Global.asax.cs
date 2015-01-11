@@ -4,7 +4,7 @@ using System.IO;
 using System.Net;
 using CommonServiceLocator.SimpleInjectorAdapter;
 using Funq;
-using LearningLoop.Core.IoC;
+using LearningLoop.Core.Infrastructure.IoC;
 using LearningLoop.Core.WebServices;
 using LearningLoop.Core.WebServices.Types;
 using LearningLoop.Infrastructure.Persistence;

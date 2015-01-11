@@ -6,12 +6,12 @@
 }
 
 @section pageHeader{
-<div class="ui information">
-    <h1 class="ui inverted header">
-        Teacher Home
-    </h1>
-    <p>View you class below</p>
-</div>
+    <div class="ui information">
+        <h1 class="ui inverted header">
+            Teacher Home
+        </h1>
+        <p>View you class below</p>
+    </div>
 }
 
 <div class="ui vertical segment">
@@ -25,59 +25,105 @@
         </div>
         <div class="row">
             <div class="column">
+
                 <div id="class-roster" class="ui cards">
-                    <div class="card">
-                        <div class="dimmable image">
-                            <div class="ui dimmer">
-                                <div class="content">
-                                    <div class="center">
-                                        <div class="ui inverted button" data-click="trigger:add-child">Add Child</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <img src="/img/no-profile-pic-200.png">
-                        </div>
+                    <div class="card" data-bind='component: "roster-card-default"'>
                     </div>
-                    @foreach (var student in this.Model.Class.Roster)
-                    {
-                        <div class="card">
-                            <div class="image">
-                            <img src="/img/@(student.Gender)1.png">
-                            </div>
-                            <div class="content">
-                                <div class="header">@student.DisplayName</div>
-                                <div class="meta">
-                                    <a class="group">Friends</a>
-                                    <a class="created">
-                                        Joined in 2011
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="ui bottom attached button">
-                                <i class="edit icon"></i>
-                                Edit
-                            </div>
-                        </div>
-                    }
+                    <!-- ko foreach: roster -->
+                    <div class="card" data-bind='component: { name: "roster-card", params: { value: $data } }'></div>
+                    <!-- /ko -->
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
-        $(document).bindHandlers();
-        App.roster = @this.Model.Class.Roster.AsRawJson();
+    App.class = @this.Model.Class.AsRawJson();
 
-        $(document).on('add-child', function () {
-            console.log("adding child");
-        });
+    ko.bindingHandlers.cardDimmer = {
+        init: function(element, valueAccessor) {
+            $(element).dimmer({
+                on: 'hover'
+            });
+        }
+    };
 
-        $("#form-login").bindForm({
-            success: function (r) {
-                $(".ui.standard.modal").modal('hide');
-                localStorage["Username"] = $("[name=Username]").val();
-                $(document).trigger('signed-in');
-            }
-        });
+    ko.components.register('roster-card-default', {
+        viewModel: function (params) {
+            // Data: student record
+            this.showEdit = ko.observable(false);
+
+            // Behaviors
+            this.addChild = function() {
+                this.showEdit(true);
+            }.bind(this);
+
+            this.save = function() {
+                $("#saveChild").form().submit();
+            }.bind(this);
+        },
+        template:
+            '<div class="dimmable image" data-bind="cardDimmer, visible: !showEdit()">\
+                <div class="ui dimmer">\
+                    <div class="content">\
+                        <div class="center">\
+                            <div class="ui inverted button" data-bind="click:addChild">Add Child</div>\
+                        </div>\
+                    </div>\
+                </div>\
+                <img src="/img/no-profile-pic-200.png">\
+            </div>\
+        <div class="content" data-bind="visible: showEdit()">\
+                            <div class="header">Add Child</div>\
+                            <form id="saveChild" action="@(new AddStudentRequest().ToPostUrl())" method="POST" enctype="multipart/form-data">\
+                                <label><b>Profile Image</b></label>\
+                                <input type="file" name="ProfileImage" id="ProfileImage" />\
+                                <label><b>First Name</b></label>\
+                                <input type="text" name="FirstName" id="FirstName" />\
+                                <label><b>Last Name</b></label>\
+                                <input type="text" name="LastName" id="LastName" />\
+                                <label><b>Gender</b></label>\
+                                <input type="text" name="Gender" id="Gender" />\
+                            </form>\
+                        </div>\
+                        <div class="ui bottom attached button" data-bind="visible: showEdit(), click: save">\
+                            <i class="save icon"></i>\
+    Save\
+</div>'
+    });
+
+    ko.components.register('roster-card', {
+        viewModel: function (params) {
+            // Data: student record
+            this.gender = params.value.gender;
+            this.name = params.value.displayName;
+            this.imagePath = "/img/" + this.gender + "1.png";
+
+            // Behaviors
+            this.edit = function () { console.log("edit") }.bind(this);
+        },
+        template:
+            '<div class="image">\
+                    <img data-bind="attr: { src: imagePath }">\
+                </div>\
+                <div class="content">\
+                    <div class="header"data-bind="text: name"></div>\
+                    <div class="meta">\
+                        <a class="group">Friends</a>\
+                        <a class="created">\
+                            Joined in 2011\
+                        </a>\
+                    </div>\
+                </div>\
+                <div class="ui bottom attached button" data-bind="click: edit">\
+                    <i class="edit icon"></i>\
+                    Edit\
+                </div>'
+    });
+
+    ko.applyBindings(App.class);
+
+
+
 </script>

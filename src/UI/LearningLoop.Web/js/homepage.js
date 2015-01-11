@@ -5,8 +5,6 @@ $(document)
       $('.ui.dropdown').dropdown({
           action: 'hide'
       });
-      $('#class-roster.cards .image.dimmable').dimmer({
-          on: 'hover'
-      });
+     
       $('.ui.sticky').sticky();
   });
