@@ -48,9 +48,12 @@ namespace LearningLoop.Web
         {
             var simpleContainer = DependencyRegistrar.RegisterServices();
             container.Adapter = new SimpleInjectorAdapter(simpleContainer); // to integrate with ServiceStack
-            var adapter = new SimpleInjectorServiceLocatorAdapter(simpleContainer);
+            IServiceLocator adapter = new SimpleInjectorServiceLocatorAdapter(simpleContainer);
+            var serviceLocatorProvider = new ServiceLocatorProvider(() => adapter);
             ServiceLocator.SetLocatorProvider(() => adapter); // to integrate with service locator
-
+            simpleContainer.Register(() => serviceLocatorProvider);
+            simpleContainer.Verify();
+            
             SetupDbMockData(container, AppSettings);
 
             //Enable Authentication an Registration
@@ -60,6 +63,7 @@ namespace LearningLoop.Web
             JsConfig.EmitCamelCaseNames = true;
             JsConfig.DateHandler = DateHandler.ISO8601;
 
+            Plugins.Add(new SessionFeature());
             Plugins.Add(new RazorFormat());
             Plugins.Add(new RequestLogsFeature());
             Plugins.Add(new PostmanFeature());

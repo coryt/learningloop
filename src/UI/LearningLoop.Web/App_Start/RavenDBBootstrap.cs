@@ -67,35 +67,23 @@ namespace LearningLoop.Infrastructure.Persistence
 
         public static void PopulateMockData(Container container)
         {
-            var classes = new List<Classroom>()
-            {
-                new Classroom()
-                {
-                    DisplayName = "Classroom 1",
-                    UniqueName = "Classroom 1"
-                },
-                new Classroom()
-                {
-                    DisplayName = "Classroom 2",
-                    UniqueName = "Classroom 2"
-                },
-                new Classroom()
-                {
-                    DisplayName = "Classroom 3",
-                    UniqueName = "Classroom 3"
-                }
-            };
+            //var classes = new List<Classroom>()
+            //{
+            //    new Classroom("Classroom 1", true),
+            //    new Classroom("Classroom 2", true),
+            //    new Classroom("Classroom 3", true)
+            //};
 
-            using (var session = DocumentStore.OpenSession())
-            {
-                classes.ForEach(c =>
-                {
-                    var result = session.Query<Classroom>().Where(cr => cr.DisplayName.Equals(c.DisplayName));
-                    if (result == null)
-                        session.Store(c);
-                });
-                session.SaveChanges();
-            }
+            //using (var session = DocumentStore.OpenSession())
+            //{
+            //    classes.ForEach(c =>
+            //    {
+            //        var result = session.Query<Classroom>().Where(cr => cr.DisplayName.Equals(c.DisplayName));
+            //        if (result == null)
+            //            session.Store(c);
+            //    });
+            //    session.SaveChanges();
+            //}
         }
     }
 }

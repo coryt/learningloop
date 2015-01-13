@@ -9,29 +9,30 @@ using LearningLoop.Core.DomainServices;
 using LearningLoop.Core.WebServices.Types;
 using ServiceStack;
 using ServiceStack.Web;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using LearningLoop.Core.Domain.Commands;
+using LearningLoop.Core.Domain.Queries;
 using MediatR;
 
 namespace LearningLoop.Core.WebServices
 {
     [Route("/home")]
-    public class GetAccount
+    public class GetAccount : IReturn<AccountResponse>
     { }
 
     public class AccountResponse
     {
-        public AccountResponse()
-        {
-            Class = new Classroom();
-        }
         public Classroom Class { get; set; }
     }
 
+    [Route("/addclass")]
+    public class AddClassRequest : IReturn<AccountResponse>
+    {
+        public string DisplayName { get; set; }
+        public string OpenRegistration { get; set; }
+    }
+
     [Route("/addstudent")]
-    public class AddStudentRequest
+    public class AddStudentRequest : IReturn<AccountResponse>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -53,42 +54,43 @@ namespace LearningLoop.Core.WebServices
             _mediator = mediator;
         }
 
-        public object Get(GetAccount request)
-        {
-            return new AccountResponse()
-            {
-                Class =
-                {
-                    ClassRoster = new List<Student>
-                    {
-                        new Student()
-                        {
-                            DisplayName = "John",
-                            Gender = "Male",
-                        },
-                        new Student()
-                        {
-                            DisplayName = "Mary",
-                            Gender = "Female",
-                        },
-                        new Student()
-                        {
-                            DisplayName = "Jenny",
-                            Gender = "Female",
-                        }
 
-                    }
-                }
+        public object Post(AddClassRequest request)
+        {
+            var session = GetSession() as UserSession;
+
+            var classroom = _mediator.Send(new CreateClassroomCommand(session.UserAuthRef, request.DisplayName));
+            return new AccountResponse
+            {
+                Class = classroom
             };
         }
 
-        public void Post(AddStudentRequest request)
+        public object Get(GetAccount request)
         {
+            var session = GetSession() as UserSession;
+
+            var response = _mediator.Send(new GetClassroomByTeacherIdQuery(session.UserAuthRef));
+
+            return new AccountResponse
+            {
+                Class = response.Classoom
+            };
+        }
+
+        public object Post(AddStudentRequest request)
+        {
+            var session = GetSession() as UserSession;
+
             request.ImageContent =
                   Request.Files.SingleOrDefault(
                       uploadedFile => uploadedFile.ContentLength > 0 && uploadedFile.ContentLength < MaxUploadSize);
 
-            _mediator.Send(new AddStudentToRosterCommand(GetSession().UserAuthId, request));
+            var classroom = _mediator.Send(new AddStudentToRosterCommand(session.UserAuthRef, request));
+            return new AccountResponse
+            {
+                Class = classroom
+            };
         }
       
     }

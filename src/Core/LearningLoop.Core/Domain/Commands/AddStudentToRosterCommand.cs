@@ -4,14 +4,14 @@ using MediatR;
 
 namespace LearningLoop.Core.Domain.Commands
 {
-    public class AddStudentToRosterCommand : IRequest
+    public class AddStudentToRosterCommand : IRequest<Classroom>
     {
-        public string ClassId { get; set; }
+        public string TeacherId { get; set; }
         public AddStudentRequest WebRequest { get; set; }
 
-        public AddStudentToRosterCommand(string classId, AddStudentRequest webRequest)
+        public AddStudentToRosterCommand(string teacherId, AddStudentRequest webRequest)
         {
-            ClassId = classId;
+            TeacherId = teacherId;
             WebRequest = webRequest;
         }
 
@@ -24,13 +24,13 @@ namespace LearningLoop.Core.Domain.Commands
             if (otherCommand == null)
                 return false;
 
-            return otherCommand.ClassId == ClassId &&
+            return otherCommand.TeacherId == TeacherId &&
                    otherCommand.WebRequest == WebRequest;
         }
 
         protected bool Equals(AddStudentToRosterCommand other)
         {
-            return string.Equals(ClassId, other.ClassId)
+            return string.Equals(TeacherId, other.TeacherId)
                    && string.Equals(WebRequest, other.WebRequest);
         }
 
@@ -38,7 +38,7 @@ namespace LearningLoop.Core.Domain.Commands
         {
             unchecked
             {
-                return ((ClassId != null ? ClassId.GetHashCode() : 0) * 397)
+                return ((TeacherId != null ? TeacherId.GetHashCode() : 0) * 397)
                        ^ (WebRequest != null ? WebRequest.GetHashCode() : 0);
             }
         }

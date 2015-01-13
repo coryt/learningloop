@@ -3,15 +3,15 @@ using MediatR;
 
 namespace LearningLoop.Core.Domain.Commands
 {
-    public class CreateClassroomCommand : IRequest
+    public class CreateClassroomCommand : IRequest<Classroom>
     {
        
-        public string UserId { get; set; }
+        public string TeacherId { get; set; }
         public string Name { get; set; }
 
-        public CreateClassroomCommand(string userId, string className)
+        public CreateClassroomCommand(string teacherId, string className)
         {
-            UserId = userId;
+            TeacherId = teacherId;
             Name = className;
         }
 
@@ -25,19 +25,19 @@ namespace LearningLoop.Core.Domain.Commands
                 return false;
 
             return otherCommand.Name == Name &&
-               otherCommand.UserId == UserId;
+               otherCommand.TeacherId == TeacherId;
         }
 
         protected bool Equals(CreateClassroomCommand other)
         {
-            return string.Equals(UserId, other.UserId) && string.Equals(Name, other.Name);
+            return string.Equals(TeacherId, other.TeacherId) && string.Equals(Name, other.Name);
         }
 
         public override int GetHashCode()
         {
             unchecked
             {
-                return ((UserId != null ? UserId.GetHashCode() : 0) * 397) ^ (Name != null ? Name.GetHashCode() : 0);
+                return ((TeacherId != null ? TeacherId.GetHashCode() : 0) * 397) ^ (Name != null ? Name.GetHashCode() : 0);
             }
         }
 

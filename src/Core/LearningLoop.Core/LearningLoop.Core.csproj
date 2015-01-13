@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="MediatR">
       <HintPath>..\..\packages\MediatR.1.0.0.0\lib\portable-net45+win+wp80+Xamarin.iOS10+MonoAndroid10+MonoTouch10\MediatR.dll</HintPath>
     </Reference>
@@ -90,11 +96,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainServices\Commands\AddStudentToRosterHandler.cs" />
+    <Compile Include="DomainServices\Queries\GetClassroomQueryHandler.cs" />
     <Compile Include="Domain\Classroom.cs" />
     <Compile Include="Domain\Commands\AddStudentToRosterCommand.cs" />
+    <Compile Include="Domain\Entity.cs" />
+    <Compile Include="Domain\Enumeration.cs" />
     <Compile Include="Domain\Mappings\Mapper.cs" />
     <Compile Include="Domain\Commands\CreateClassroomCommand.cs" />
     <Compile Include="DomainServices\Commands\CreateClassroomHandler.cs" />
+    <Compile Include="Domain\Queries\GetClassroomByTeacherIdQuery.cs" />
     <Compile Include="Domain\Student.cs" />
     <Compile Include="Infrastructure\ImageProcessing.cs" />
     <Compile Include="Infrastructure\IoC\SimpleInjectorAdapter.cs" />
@@ -106,8 +116,7 @@
     <Compile Include="WebServices\UserProfileService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DomainServices\Queries\" />
-    <Folder Include="Domain\Queries\" />
+    <Folder Include="Infrastructure\Indexes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

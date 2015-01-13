@@ -11,6 +11,7 @@ namespace LearningLoop.Core.WebServices.Types
     {
         [DataMember]
         public string ProfileUrl64 { get; set; }
+        public string UserAuthRef { get { return string.Format("UserAuths/{0}", this.UserAuthId); }}
 
         public override void OnAuthenticated(IServiceBase authService, IAuthSession session, IAuthTokens tokens, Dictionary<string, string> authInfo)
         {
@@ -24,6 +25,11 @@ namespace LearningLoop.Core.WebServices.Types
             base.OnCreated(httpReq);
 
 
+        }
+
+        public override void OnRegistered(IRequest httpReq, IAuthSession session, IServiceBase service)
+        {
+            base.OnRegistered(httpReq, session, service);
         }
     }
 }

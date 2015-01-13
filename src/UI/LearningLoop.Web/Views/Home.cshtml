@@ -16,23 +16,73 @@
 
 <div class="ui vertical segment">
     <div class="ui very relaxed stackable page grid">
-        <div class="row">
+        <div class="row" data-bind="hidden: $data == null">
             <div class="column">
-                <h1 class="center aligned ui inverted header">
-                    The Best Cat Articles
-                </h1>
+                <div class="ui top attached menu">
+                    <div class="item">
+                        <div class="ui transparent icon input">
+                            <input type="text" placeholder="Search...">
+                            <i class="search icon"></i>
+                        </div>
+                    </div>
+                    <div class="right menu">
+                        <a class="active green item">
+                            <i class="grid layout icon"></i>
+                        </a>
+                        <a class="item">
+                            <i class="block layout icon"></i>
+                        </a>
+                        <a class="item">
+                            <i class="list layout icon"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ui bottom attached segment">
+                    <div id="class-roster" class="ui cards">
+                        <div class="card" data-bind='component: "roster-card-default"'>
+                        </div>
+                        <!-- ko foreach: classRoster -->
+                        <div class="card" data-bind='component: { name: "roster-card", params: { value: $data } }'></div>
+                        <!-- /ko -->
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="row">
+
+        <div class="row" data-bind="visible: $data == null">
             <div class="column">
-
-                <div id="class-roster" class="ui cards">
-                    <div class="card" data-bind='component: "roster-card-default"'>
-                    </div>
-                    <!-- ko foreach: roster -->
-                    <div class="card" data-bind='component: { name: "roster-card", params: { value: $data } }'></div>
-                    <!-- /ko -->
-
+                <h2 class="ui header">
+                    Looks like you don't have a class!
+                    <div class="sub header">To manage your students activities, first create a class. This will allow you to ... blah blah need copy here.</div>
+                </h2>
+                <div class="ui hidden divider"></div>
+                <div class="ui form segment">
+                    <form id="form-add-class" action="@(new AddClassRequest().ToPostUrl())">
+                        <h4 class="ui dividing header">Class Information</h4>
+                        <div class="field">
+                            <label>Display Name - How do you want parents to identify your class?</label>
+                            <div class="field">
+                                <input type="text" name="DisplayName" placeholder="Display Name">
+                            </div>
+                        </div>
+                        <h5 class="ui header">Registration</h5>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="radio" name="OpenRegistration" checked="checked">
+                                <label>Allow <b>anyone</b> to see my class</label>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui toggle checkbox">
+                                <input type="radio" name="OpenRegistration">
+                                <label>Allow only <b>specific parents</b> with an invite code to see my class</label>
+                            </div>
+                        </div>
+                        <div class="ui error message">
+                            <div class="header">We noticed some issues</div>
+                        </div>
+                        <button type="submit" class="ui submit button">Register</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -40,14 +90,14 @@
 </div>
 <script type="text/javascript">
     App.class = @this.Model.Class.AsRawJson();
+    $(document).bindHandlers();
 
-    ko.bindingHandlers.cardDimmer = {
-        init: function(element, valueAccessor) {
-            $(element).dimmer({
-                on: 'hover'
-            });
+    $("#form-add-class").bindForm({
+        success: function (r) {
+            console.log("added class");
+            //$(document).trigger('signed-in');
         }
-    };
+    });
 
     ko.components.register('roster-card-default', {
         viewModel: function (params) {
@@ -64,7 +114,7 @@
             }.bind(this);
         },
         template:
-            '<div class="dimmable image" data-bind="cardDimmer, visible: !showEdit()">\
+            '<div class="dimmable image" data-bind="cardDimmer, hidden: showEdit()">\
                 <div class="ui dimmer">\
                     <div class="content">\
                         <div class="center">\
@@ -74,23 +124,31 @@
                 </div>\
                 <img src="/img/no-profile-pic-200.png">\
             </div>\
-        <div class="content" data-bind="visible: showEdit()">\
-                            <div class="header">Add Child</div>\
-                            <form id="saveChild" action="@(new AddStudentRequest().ToPostUrl())" method="POST" enctype="multipart/form-data">\
-                                <label><b>Profile Image</b></label>\
-                                <input type="file" name="ProfileImage" id="ProfileImage" />\
-                                <label><b>First Name</b></label>\
-                                <input type="text" name="FirstName" id="FirstName" />\
-                                <label><b>Last Name</b></label>\
-                                <input type="text" name="LastName" id="LastName" />\
-                                <label><b>Gender</b></label>\
-                                <input type="text" name="Gender" id="Gender" />\
-                            </form>\
+            <div class="content" data-bind="visible: showEdit()">\
+                <div class="ui small form">\
+                    <form id="saveChild" action="@(new AddStudentRequest().ToPostUrl())" method="POST" enctype="multipart/form-data">\
+                        <div class="field"><label><b>Profile Image</b></label>\
+                            <input type="file" name="ProfileImage" id="ProfileImage" />\
                         </div>\
-                        <div class="ui bottom attached button" data-bind="visible: showEdit(), click: save">\
-                            <i class="save icon"></i>\
-    Save\
-</div>'
+                        <div class="field"><label><b>First Name</b></label>\
+                            <input type="text" name="FirstName" id="FirstName" /></div>\
+                        <div class="field"><label><b>Last Name</b></label>\
+                            <input type="text" name="LastName" id="LastName" /></div>\
+                        <div class="field">\
+                            <label>Gender</label>\
+                            <select class="ui dropdown" data-bind="dropdown">\
+                                <option value="">Gender</option>\
+                                <option value="Male">Male</option>\
+                                <option value="Female">Female</option>\
+                            </select>\
+                        </div>\
+                    </form>\
+                </div>\
+            </div>\
+            <div class="ui bottom attached button" data-bind="visible: showEdit(), click: save">\
+                <i class="save icon"></i>\
+                Save\
+            </div>'
     });
 
     ko.components.register('roster-card', {
@@ -123,7 +181,6 @@
     });
 
     ko.applyBindings(App.class);
-
 
 
 </script>

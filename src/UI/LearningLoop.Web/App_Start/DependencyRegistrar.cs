@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using LearningLoop.Core.Domain.Commands;
+﻿using LearningLoop.Core.Domain.Commands;
 using LearningLoop.Infrastructure.Persistence;
 using MediatR;
-using Raven.Client;
+using Microsoft.Practices.ServiceLocation;
 using Raven.Client.Document;
 using ServiceStack.Auth;
 using ServiceStack.Authentication.RavenDb;
@@ -37,7 +36,6 @@ namespace LearningLoop.Web
             container.Register<IAuthRepository>(() => new RavenDbUserAuthRepository<UserAuth, UserAuthDetails>(RavenDBBootstrap.DocumentStore));
             container.Register<IUserAuthRepository>(() => new RavenDbUserAuthRepository<UserAuth, UserAuthDetails>(RavenDBBootstrap.DocumentStore));
 
-            container.Verify();
             return container;
         }
     }

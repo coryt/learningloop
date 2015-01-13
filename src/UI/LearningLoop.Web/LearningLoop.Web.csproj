@@ -169,12 +169,11 @@
     <Content Include="js\components\home-page\home.js" />
     <Content Include="js\homepage.js" />
     <Content Include="gruntfile.js" />
+    <Content Include="js\knockout-bindings.js" />
     <Content Include="packages.config" />
     <Content Include="appSettings.config" />
     <Content Include="package.json" />
     <Content Include="bower.json" />
-    <Content Include="wwwroot_build\deploy\appsettings.txt" />
-    <Content Include="wwwroot_build\README.txt" />
     <None Include="Scripts\_references.js" />
     <Content Include="default.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -187,12 +186,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-    <Content Include="wwwroot_build\00-install-dependencies.bat" />
-    <Content Include="wwwroot_build\01-run-tests.bat" />
-    <Content Include="wwwroot_build\02-package-server.bat" />
-    <Content Include="wwwroot_build\03-package-client.bat" />
-    <Content Include="wwwroot_build\04-deploy-app.bat" />
-    <Content Include="wwwroot_build\publish\config.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Web.config">
