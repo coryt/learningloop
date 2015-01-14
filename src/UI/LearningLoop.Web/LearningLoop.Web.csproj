@@ -150,6 +150,17 @@
   <ItemGroup>
     <Content Include="css\homepage.css" />
     <Content Include="Global.asax" />
+    <Content Include="img\baby-bird.png" />
+    <Content Include="img\betakit.png" />
+    <Content Include="img\bg.jpg" />
+    <Content Include="img\ed-surge.png" />
+    <Content Include="img\ed-tech-times.png" />
+    <Content Include="img\kid1.jpg" />
+    <Content Include="img\kid2.jpg" />
+    <Content Include="img\kid3.jpg" />
+    <Content Include="img\logo.jpg" />
+    <Content Include="img\logo.png" />
+    <Content Include="img\main_logo.png" />
     <Content Include="img\Male1.png" />
     <Content Include="img\Male2.png" />
     <Content Include="img\Male3.png" />
@@ -163,7 +174,10 @@
     <Content Include="img\no-profile-pic-96.png" />
     <Content Include="img\no-profile-pic.jpg" />
     <Content Include="img\no-profile64.png" />
+    <Content Include="img\parent_with_daughter.jpg" />
+    <Content Include="img\peek.png" />
     <Content Include="img\stock-vector-children-face-set-138823955.jpg" />
+    <Content Include="img\techvibes-logo.png" />
     <Content Include="img\twitter_normal.png" />
     <Content Include="js\components\home-page\home.html" />
     <Content Include="js\components\home-page\home.js" />

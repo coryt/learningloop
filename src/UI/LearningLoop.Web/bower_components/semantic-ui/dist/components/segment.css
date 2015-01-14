@@ -377,7 +377,7 @@
   border-top: 2px solid #d95c5c;
 }
 .ui.teal.segment:not(.inverted) {
-  border-top: 2px solid #00b5ad;
+  border-top: 2px solid #78bec0;
 }
 .ui.yellow.segment:not(.inverted) {
   border-top: 2px solid #f2c61f;
@@ -453,7 +453,7 @@
   color: #ffffff !important;
 }
 .ui.inverted.teal.segment {
-  background-color: #00b5ad !important;
+  background-color: #78bec0 !important;
   color: #ffffff !important;
 }
 .ui.inverted.yellow.segment {
@@ -519,7 +519,7 @@
 
 .ui.secondary.segment {
   background: #faf9fa;
-  color: rgba(0, 0, 0, 0.8);
+  color: #78bec0;
 }
 .ui.tertiary.segment {
   background: #ebebeb;

@@ -24,15 +24,15 @@ namespace LearningLoop.Core.WebServices
         public Classroom Class { get; set; }
     }
 
-    [Route("/addclass")]
-    public class AddClassRequest : IReturn<AccountResponse>
+    [Route("/class")]
+    public class ClassRequest : IReturn<AccountResponse>
     {
         public string DisplayName { get; set; }
         public string OpenRegistration { get; set; }
     }
 
-    [Route("/addstudent")]
-    public class AddStudentRequest : IReturn<AccountResponse>
+    [Route("/class/student")]
+    public class StudentRequest : IReturn<AccountResponse>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -47,15 +47,13 @@ namespace LearningLoop.Core.WebServices
     {
         private readonly IMediator _mediator;
         const int MaxUploadSize = 200000;
-        
 
         public AccountWebService(IMediator mediator)
         {
             _mediator = mediator;
         }
 
-
-        public object Post(AddClassRequest request)
+        public object Post(ClassRequest request)
         {
             var session = GetSession() as UserSession;
 
@@ -78,7 +76,22 @@ namespace LearningLoop.Core.WebServices
             };
         }
 
-        public object Post(AddStudentRequest request)
+        public object Post(StudentRequest request)
+        {
+            var session = GetSession() as UserSession;
+
+            request.ImageContent =
+                  Request.Files.SingleOrDefault(
+                      uploadedFile => uploadedFile.ContentLength > 0 && uploadedFile.ContentLength < MaxUploadSize);
+
+            var classroom = _mediator.Send(new AddStudentToRosterCommand(session.UserAuthRef, request));
+            return new AccountResponse
+            {
+                Class = classroom
+            };
+        }
+
+        public object Put(StudentRequest request)
         {
             var session = GetSession() as UserSession;
 

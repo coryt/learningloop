@@ -572,7 +572,7 @@
   border-top: 0.2em solid #d95c5c;
 }
 .ui.teal.table {
-  border-top: 0.2em solid #00b5ad;
+  border-top: 0.2em solid #78bec0;
 }
 .ui.yellow.table {
   border-top: 0.2em solid #f2c61f;
@@ -612,7 +612,7 @@
   color: #ffffff !important;
 }
 .ui.inverted.teal.table {
-  background-color: #00b5ad !important;
+  background-color: #78bec0 !important;
   color: #ffffff !important;
 }
 .ui.inverted.yellow.table {

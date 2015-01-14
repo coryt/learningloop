@@ -7,9 +7,9 @@ namespace LearningLoop.Core.Domain.Commands
     public class AddStudentToRosterCommand : IRequest<Classroom>
     {
         public string TeacherId { get; set; }
-        public AddStudentRequest WebRequest { get; set; }
+        public StudentRequest WebRequest { get; set; }
 
-        public AddStudentToRosterCommand(string teacherId, AddStudentRequest webRequest)
+        public AddStudentToRosterCommand(string teacherId, StudentRequest webRequest)
         {
             TeacherId = teacherId;
             WebRequest = webRequest;

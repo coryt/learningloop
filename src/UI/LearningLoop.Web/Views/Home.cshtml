@@ -6,14 +6,127 @@
 }
 
 @section pageHeader{
-    <div class="ui information">
-        <h1 class="ui inverted header">
-            Teacher Home
-        </h1>
-        <p>View you class below</p>
+    <div class="ui large  breadcrumb">
+        <a class="section">Home</a>
+        <i class="right chevron icon divider"></i>
+        <a class="section">Class</a>
+        <i class="right chevron icon divider"></i>
+        <div class="active section">Roster</div>
     </div>
 }
+<template id="roster-card-add-template">
+    <div class="dimmable image" data-bind="cardDimmer, hidden: showEdit()">
+        <div class="ui dimmer">
+            <div class="content">
+                <div class="center">
+                    <div class="ui inverted button" data-bind="click:add">Add Child</div>
+                </div>
+            </div>
+        </div>
+        <img src="/img/no-profile-pic-200.png">
+    </div>
+    <div class="card" data-bind='visible: showEdit()'>
+        <div class="content">
+            <div class="ui small form">
+                <form id="saveChild" action="@(new StudentRequest().ToPostUrl())" method="POST" enctype="multipart/form-data">
+                    <div class="field">
+                        <label><b>Profile Image</b></label>
+                        <input type="file" name="ProfileImage" id="ProfileImage" />
+                    </div>
+                    <div class="field">
+                        <label><b>First Name</b></label>
+                        <input type="text" name="FirstName" id="FirstName" />
+                    </div>
+                    <div class="field">
+                        <label><b>Last Name</b></label>
+                        <input type="text" name="LastName" id="LastName" />
+                    </div>
+                    <div class="field">
+                        <label>Gender</label>
+                        <select class="ui dropdown" data-bind="dropdown">
+                            <option value="">Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="extra content">
+            <div class="left floated" data-bind="click: save">
+                <i class="save icon"></i>
+                Save
+            </div>
+            <div class="right floated" data-bind="click: undo">
+                <i class="undo icon"></i>
+                Undo
+            </div>
+        </div>
+    </div>
+</template>
+<template id='roster-card-template'>
+    <div class="image" data-bind="hidden: showEdit()">
+        <img data-bind="attr: { src: imagePath }">
+    </div>
+    <div class="content">
+        <div class="header" data-bind="text: name"></div>
+        <div class="meta" data-bind="hidden: showEdit()">
+            <a class="time">Last Update 2 days ago</a>
+        </div>
+    </div>
+    <div class="extra content">
+        <div class="left floated" data-bind="hidden: showEdit(), click:edit">
+            <i class="edit icon"></i>
+            Edit
+        </div>
+        <div class="right floated" data-bind="hidden: showEdit(), click:remove">
+            <i class="remove icon"></i>
+            Delete
+        </div>
+    </div>
+    <div class="card" data-bind='visible: showEdit()'>
+        <div class="content">
+            <div class="ui small form">
+                <form id="saveChild" action="@(new StudentRequest().ToPostUrl())" method="POST" enctype="multipart/form-data">
+                    <div class="field">
+                        <label><b>Profile Image</b></label>
+                        <input type="file" name="ProfileImage" id="ProfileImage" />
+                    </div>
+                    <div class="field">
+                        <label><b>First Name</b></label>
+                        <input type="text" name="FirstName" id="FirstName" data-bind="attr: { value: firstName }" />
+                    </div>
+                    <div class="field">
+                        <label><b>Last Name</b></label>
+                        <input type="text" name="LastName" id="LastName" data-bind="attr: { value: lastName }" />
+                    </div>
+                    <div class="field">
+                        <label>Gender</label>
+                        <select class="ui dropdown" data-bind="dropdown">
+                            <option value="">Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="extra content">
+            <div class="left floated" data-bind="click: save">
+                <i class="save icon"></i>
+                Save
+            </div>
+            <div class="right floated" data-bind="click: undo">
+                <i class="undo icon"></i>
+                Undo
+            </div>
+        </div>
+    </div>
+</template>
 
+<div class="ui segment">
+    <a class="ui ribbon label">Ribbon</a>
+</div>
 <div class="ui vertical segment">
     <div class="ui very relaxed stackable page grid">
         <div class="row" data-bind="hidden: $data == null">
@@ -39,7 +152,7 @@
                 </div>
                 <div class="ui bottom attached segment">
                     <div id="class-roster" class="ui cards">
-                        <div class="card" data-bind='component: "roster-card-default"'>
+                        <div class="card" data-bind='component: "roster-card-add"'>
                         </div>
                         <!-- ko foreach: classRoster -->
                         <div class="card" data-bind='component: { name: "roster-card", params: { value: $data } }'></div>
@@ -57,7 +170,7 @@
                 </h2>
                 <div class="ui hidden divider"></div>
                 <div class="ui form segment">
-                    <form id="form-add-class" action="@(new AddClassRequest().ToPostUrl())">
+                    <form id="form-add-class" action="@(new ClassRequest().ToPostUrl())">
                         <h4 class="ui dividing header">Class Information</h4>
                         <div class="field">
                             <label>Display Name - How do you want parents to identify your class?</label>
@@ -99,88 +212,37 @@
         }
     });
 
-    ko.components.register('roster-card-default', {
+    ko.components.register('roster-card-add', {
+        template: { element: 'roster-card-add-template' },
         viewModel: function (params) {
             // Data: student record
             this.showEdit = ko.observable(false);
 
             // Behaviors
-            this.addChild = function() {
-                this.showEdit(true);
-            }.bind(this);
-
-            this.save = function() {
-                $("#saveChild").form().submit();
-            }.bind(this);
-        },
-        template:
-            '<div class="dimmable image" data-bind="cardDimmer, hidden: showEdit()">\
-                <div class="ui dimmer">\
-                    <div class="content">\
-                        <div class="center">\
-                            <div class="ui inverted button" data-bind="click:addChild">Add Child</div>\
-                        </div>\
-                    </div>\
-                </div>\
-                <img src="/img/no-profile-pic-200.png">\
-            </div>\
-            <div class="content" data-bind="visible: showEdit()">\
-                <div class="ui small form">\
-                    <form id="saveChild" action="@(new AddStudentRequest().ToPostUrl())" method="POST" enctype="multipart/form-data">\
-                        <div class="field"><label><b>Profile Image</b></label>\
-                            <input type="file" name="ProfileImage" id="ProfileImage" />\
-                        </div>\
-                        <div class="field"><label><b>First Name</b></label>\
-                            <input type="text" name="FirstName" id="FirstName" /></div>\
-                        <div class="field"><label><b>Last Name</b></label>\
-                            <input type="text" name="LastName" id="LastName" /></div>\
-                        <div class="field">\
-                            <label>Gender</label>\
-                            <select class="ui dropdown" data-bind="dropdown">\
-                                <option value="">Gender</option>\
-                                <option value="Male">Male</option>\
-                                <option value="Female">Female</option>\
-                            </select>\
-                        </div>\
-                    </form>\
-                </div>\
-            </div>\
-            <div class="ui bottom attached button" data-bind="visible: showEdit(), click: save">\
-                <i class="save icon"></i>\
-                Save\
-            </div>'
+            this.add = function() { this.showEdit(true); }.bind(this);
+            this.undo = function() { console.log("undo"); }.bind(this);
+            this.save = function() { $("#saveChild").form().submit(); }.bind(this);
+            this.undo = function() { this.showEdit(false); }.bind(this);}
     });
 
     ko.components.register('roster-card', {
-        viewModel: function (params) {
+        template: { element: 'roster-card-template' },
+        viewModel: function(params) {
             // Data: student record
             this.gender = params.value.gender;
-            this.name = params.value.displayName;
+            this.firstName = params.value.firstName;
+            this.lastName = params.value.lastName;
+            this.name = params.value.fullName;
             this.imagePath = "/img/" + this.gender + "1.png";
+            this.showEdit = ko.observable(false);
 
             // Behaviors
-            this.edit = function () { console.log("edit") }.bind(this);
-        },
-        template:
-            '<div class="image">\
-                    <img data-bind="attr: { src: imagePath }">\
-                </div>\
-                <div class="content">\
-                    <div class="header"data-bind="text: name"></div>\
-                    <div class="meta">\
-                        <a class="group">Friends</a>\
-                        <a class="created">\
-                            Joined in 2011\
-                        </a>\
-                    </div>\
-                </div>\
-                <div class="ui bottom attached button" data-bind="click: edit">\
-                    <i class="edit icon"></i>\
-                    Edit\
-                </div>'
+            this.edit = function() { this.showEdit(true); }.bind(this);
+            this.remove = function() { console.log("delete"); }.bind(this);
+            this.save = function() { $("#saveChild").form().submit(); }.bind(this);
+            this.undo = function() {  this.showEdit(false); }.bind(this);
+        }
     });
 
     ko.applyBindings(App.class);
-
-
 </script>
