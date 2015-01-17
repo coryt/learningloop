@@ -1,0 +1,6 @@
+{
+	"iisApp": "LearningLoop",
+	"serverAddress": "deploy-server.example.com",
+	"userName": "{WebDeployUserName}",
+	"password" : "{WebDeployPassword}"
+}
