@@ -183,3 +183,6 @@ FakesAssemblies/
 *.txt
 webdeploy.zip
 *.DotSettings
+
+src/UI/LearningLoop.Web/teststub.log
+*.log
